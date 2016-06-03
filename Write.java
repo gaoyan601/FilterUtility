@@ -43,7 +43,7 @@ public class Write {
 		}
 		Sheet sheet = workbook.createSheet("sheet1");
 		
-		//ÎªÁË²»ÈÃÔ­list¸Ä±ä¡£
+		//ä¸ºäº†ä¸è®©åŸlistæ”¹å˜ã€‚
 		List<List<String>> copyList = new ArrayList<List<String>>(list);	
 		dictSort(copyList);
 		
@@ -71,10 +71,10 @@ public class Write {
 			@Override
 			public int compare(List<String> o1, List<String> o2)
 			{
-				// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+				// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 				return o1.get(0).compareTo(o2.get(0));
 			}
 		});
 	}
-
+	
 }
