@@ -15,7 +15,11 @@ public class Time
 	
 	public static int compare(String d1, String d2)
 	{
-		return d1.compareTo(d2);
+		if(d1.compareTo(d2) > 0)
+			return 1;
+		else if(d1.compareTo(d2) < 0)
+			return -1;
+		return 0;
 	}
 	
 	//�ж��ַ����Ƿ���	���������֣�0-9
