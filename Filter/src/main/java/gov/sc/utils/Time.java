@@ -3,8 +3,19 @@ package gov.sc.utils;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
+/**
+ * 
+ * @author chan
+ *
+ */
+
 public class Time
 {
+	/**
+	 * 
+	 * @param String
+	 * @return
+	 */
 	public static String convert(String date)
 	{
 		if(isContainAlphabet(date))
@@ -13,6 +24,13 @@ public class Time
 		return convertChnDate(date);
 	}
 	
+	/**
+	 * 对两个时间进行比较：d1>d2则返回1,d1==d2则返回0,d1<d2则返回-1。
+	 * 例如 d1 = 2016/5/30, d2 = 2016/5/29, 则d1 > d2. 
+	 * 
+	 * @param String d1, String d1
+	 * @return
+	 */
 	public static int compare(String d1, String d2)
 	{
 		if(d1.compareTo(d2) > 0)
@@ -22,35 +40,58 @@ public class Time
 		return 0;
 	}
 	
-	//判断字符串中是否含有	阿拉伯数字：0-9
+	/**
+	 * 判断字符串中是否含有	阿拉伯数字：0-9
+	 * @param String
+	 * @return
+	 */
 	private static boolean isContainArbNum(String str)
 	{
 		
         return Pattern.compile("[0-9]").matcher(str).find()? true:false;
 	}
 	
-	//判断字符串中是否含有	中文数字	：零...
+	/**
+	 * 判断字符串中是否含有	中文数字	：零...
+	 * 
+	 * @param String
+	 * @return
+	 */
 	private static boolean isContainChnNum(String str)
 	{
 		
         return Pattern.compile("[一二三四五六七八九十〇零壹贰叁肆伍陆柒捌玖拾]").matcher(str).find()? true:false;
 	}
-	
-	//判断字符串中是否含有	字母		：a-z/A-Z(除去am pm)
+
+	/**
+	 * 判断字符串中是否含有	字母		：a-z/A-Z(除去am pm)
+	 * @param String
+	 * @return
+	 */
 	private static boolean isContainAlphabet(String str)
 	{
 		
         return Pattern.compile("[b-lB-L]|[no]|[NO]|[q-z]|[Q-Z]").matcher(str).find()? true:false;
 	}
 	
-	//判断字符串中是否含有	关键字符	：年月日...,:/-...
+	/**
+	 * 判断字符串中是否含有	关键字符	：年月日...,:/-....
+	 * 
+	 * @param String
+	 * @return
+	 */
 	private static boolean isContainKeyword(String str)
 	{
 			
 	    return Pattern.compile("[年月日号点时分秒早凌晨晚上中下午,:：/-]").matcher(str).find()? true:false;
 	}
 	
-	//判断字符串是否包含 英文星期。
+	/**
+	 * 判断字符串是否包含 英文星期。
+	 * 
+	 * @param String
+	 * @return
+	 */
 	private static boolean isContainWeek(String str)
 	{
 		
@@ -59,6 +100,12 @@ public class Time
 	    		+ "saturday|sat.|sat|sunday|sun.|sun)").matcher(str).find()? true:false;
 	}
 	
+	/**
+	 *判断字符串是否含有 am与pm
+	 * 
+	 * @param String
+	 * @return
+	 */
 	private static boolean isContainAmOrPm(String str)
 	{
 		
@@ -66,11 +113,22 @@ public class Time
 	    		+ "pm|p.m.|pm.|p.m)").matcher(str).find()? true:false;
 	}
 	
+	/**
+	 * 判断'.'前面是否是数字，是则返回false
+	 * 
+	 * @param String, int
+	 * @return
+	 */
 	private static boolean judgePot(String date, int i)
 	{		
 		return date.charAt(i)=='.' && isContainArbNum(String.valueOf(date.charAt(i-1)))?false:true;
 	}
 	
+	/**
+	 * 
+	 * @param String
+	 * @return
+	 */
 	private static int convertAmOrPm(String str)
 	{
 		HashMap<String, Integer>numMap = new HashMap<String, Integer>();
@@ -82,7 +140,12 @@ public class Time
 		return numMap.get(str);
 	}
 	
-	//中文数字转换为阿拉伯数字		： 二零一六  - 2016
+	/**
+	 * 中文数字转换为阿拉伯数字		： 二零一六  - 2016
+	 * 
+	 * @param String
+	 * @return
+	 */
 	private static String chnNumToArbNum(String hanzi)
 	{
 		HashMap<String, Integer>numMap = new HashMap<String, Integer>();
@@ -123,7 +186,12 @@ public class Time
 		return String.valueOf(res);
 	}	
 	
-	//英语月份或日转换为相应阿拉伯数字
+	/**
+	 * 英语月份或日转换为相应阿拉伯数字
+	 * 
+	 * @param String
+	 * @return
+	 */
 	public static String engToArbNum(String date)
 	{
 		HashMap<String, Integer>numMap = new HashMap<String, Integer>();
@@ -159,7 +227,12 @@ public class Time
 		return String.valueOf(numMap.get(date));
 	}
 
-	//将英语日期（美式、英式）转换为标准 
+	/**
+	 * 将英语日期（美式、英式）转换为标准 
+	 * 
+	 * @param String
+	 * @return
+	 */
 	public static String convertEngDate(String date)
 	{
 		String[] setDate = new String[]{"2000", "01", "01", "00", "00", "00"};
@@ -229,7 +302,12 @@ public class Time
 		return setDate[2]+"/"+month+"/"+day+" "+setDate[3]+":"+setDate[4]+":"+setDate[5];
 	}
 	
-	//转换纯阿拉伯数字、纯中文、中文和阿拉伯数字混合为标准格式
+	/**
+	 * 转换纯阿拉伯数字、纯中文、中文和阿拉伯数字混合为标准格式
+	 * 
+	 * @param String
+	 * @return
+	 */
 	public static String convertChnDate(String date)
 	{
 		String[] setDate = new String[]{"2000", "01", "01", "00", "00", "00"};
