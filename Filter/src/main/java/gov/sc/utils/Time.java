@@ -22,35 +22,35 @@ public class Time
 		return 0;
 	}
 	
-	//ÅĞ¶Ï×Ö·û´®ÖĞÊÇ·ñº¬ÓĞ	°¢À­²®Êı×Ö£º0-9
+	//åˆ¤æ–­å­—ç¬¦ä¸²ä¸­æ˜¯å¦å«æœ‰	é˜¿æ‹‰ä¼¯æ•°å­—ï¼š0-9
 	private static boolean isContainArbNum(String str)
 	{
 		
         return Pattern.compile("[0-9]").matcher(str).find()? true:false;
 	}
 	
-	//ÅĞ¶Ï×Ö·û´®ÖĞÊÇ·ñº¬ÓĞ	ÖĞÎÄÊı×Ö	£ºÁã...
+	//åˆ¤æ–­å­—ç¬¦ä¸²ä¸­æ˜¯å¦å«æœ‰	ä¸­æ–‡æ•°å­—	ï¼šé›¶...
 	private static boolean isContainChnNum(String str)
 	{
 		
-        return Pattern.compile("[Ò»¶şÈıËÄÎåÁùÆß°Ë¾ÅÊ®©–ÁãÒ¼·¡ÈşËÁÎéÂ½Æâ°Æ¾ÁÊ°]").matcher(str).find()? true:false;
+        return Pattern.compile("[ä¸€äºŒä¸‰å››äº”å…­ä¸ƒå…«ä¹åã€‡é›¶å£¹è´°åè‚†ä¼é™†æŸ’æŒç–æ‹¾]").matcher(str).find()? true:false;
 	}
 	
-	//ÅĞ¶Ï×Ö·û´®ÖĞÊÇ·ñº¬ÓĞ	×ÖÄ¸		£ºa-z/A-Z(³ıÈ¥am pm)
+	//åˆ¤æ–­å­—ç¬¦ä¸²ä¸­æ˜¯å¦å«æœ‰	å­—æ¯		ï¼ša-z/A-Z(é™¤å»am pm)
 	private static boolean isContainAlphabet(String str)
 	{
 		
         return Pattern.compile("[b-lB-L]|[no]|[NO]|[q-z]|[Q-Z]").matcher(str).find()? true:false;
 	}
 	
-	//ÅĞ¶Ï×Ö·û´®ÖĞÊÇ·ñº¬ÓĞ	¹Ø¼ü×Ö·û	£ºÄêÔÂÈÕ...,:/-...
+	//åˆ¤æ–­å­—ç¬¦ä¸²ä¸­æ˜¯å¦å«æœ‰	å…³é”®å­—ç¬¦	ï¼šå¹´æœˆæ—¥...,:/-...
 	private static boolean isContainKeyword(String str)
 	{
 			
-	    return Pattern.compile("[ÄêÔÂÈÕºÅµãÊ±·ÖÃëÔçÁè³¿ÍíÉÏÖĞÏÂÎç,:£º/-]").matcher(str).find()? true:false;
+	    return Pattern.compile("[å¹´æœˆæ—¥å·ç‚¹æ—¶åˆ†ç§’æ—©å‡Œæ™¨æ™šä¸Šä¸­ä¸‹åˆ,:ï¼š/-]").matcher(str).find()? true:false;
 	}
 	
-	//ÅĞ¶Ï×Ö·û´®ÊÇ·ñ°üº¬ Ó¢ÎÄĞÇÆÚ¡£
+	//åˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦åŒ…å« è‹±æ–‡æ˜ŸæœŸã€‚
 	private static boolean isContainWeek(String str)
 	{
 		
@@ -82,21 +82,21 @@ public class Time
 		return numMap.get(str);
 	}
 	
-	//ÖĞÎÄÊı×Ö×ª»»Îª°¢À­²®Êı×Ö		£º ¶şÁãÒ»Áù  - 2016
+	//ä¸­æ–‡æ•°å­—è½¬æ¢ä¸ºé˜¿æ‹‰ä¼¯æ•°å­—		ï¼š äºŒé›¶ä¸€å…­  - 2016
 	private static String chnNumToArbNum(String hanzi)
 	{
 		HashMap<String, Integer>numMap = new HashMap<String, Integer>();
-		numMap.put("©–", 0);		numMap.put("Áã", 0);
-		numMap.put("Ò»", 1);		numMap.put("Ò¼", 1);
-		numMap.put("¶ş", 2);		numMap.put("·¡", 2);
-		numMap.put("Èı", 3);		numMap.put("Èş", 3);
-		numMap.put("ËÄ", 4);		numMap.put("ËÁ", 4);
-		numMap.put("Îå", 5);		numMap.put("Îé", 5);
-		numMap.put("Áù", 6);		numMap.put("Â½", 6);
-		numMap.put("Æß", 7);		numMap.put("Æâ", 7);
-		numMap.put("°Ë", 8);		numMap.put("°Æ", 8);
-		numMap.put("¾Å", 9);		numMap.put("¾Á", 9);
-		numMap.put("Ê®", 10);	numMap.put("Ê°", 10);
+		numMap.put("ã€‡", 0);		numMap.put("é›¶", 0);
+		numMap.put("ä¸€", 1);		numMap.put("å£¹", 1);
+		numMap.put("äºŒ", 2);		numMap.put("è´°", 2);
+		numMap.put("ä¸‰", 3);		numMap.put("å", 3);
+		numMap.put("å››", 4);		numMap.put("è‚†", 4);
+		numMap.put("äº”", 5);		numMap.put("ä¼", 5);
+		numMap.put("å…­", 6);		numMap.put("é™†", 6);
+		numMap.put("ä¸ƒ", 7);		numMap.put("æŸ’", 7);
+		numMap.put("å…«", 8);		numMap.put("æŒ", 8);
+		numMap.put("ä¹", 9);		numMap.put("ç–", 9);
+		numMap.put("å", 10);	numMap.put("æ‹¾", 10);
 		
 		int res = 0;
 		boolean flag = true;
@@ -123,7 +123,7 @@ public class Time
 		return String.valueOf(res);
 	}	
 	
-	//Ó¢ÓïÔÂ·İ»òÈÕ×ª»»ÎªÏàÓ¦°¢À­²®Êı×Ö
+	//è‹±è¯­æœˆä»½æˆ–æ—¥è½¬æ¢ä¸ºç›¸åº”é˜¿æ‹‰ä¼¯æ•°å­—
 	public static String engToArbNum(String date)
 	{
 		HashMap<String, Integer>numMap = new HashMap<String, Integer>();
@@ -159,7 +159,7 @@ public class Time
 		return String.valueOf(numMap.get(date));
 	}
 
-	//½«Ó¢ÓïÈÕÆÚ£¨ÃÀÊ½¡¢Ó¢Ê½£©×ª»»Îª±ê×¼ 
+	//å°†è‹±è¯­æ—¥æœŸï¼ˆç¾å¼ã€è‹±å¼ï¼‰è½¬æ¢ä¸ºæ ‡å‡† 
 	public static String convertEngDate(String date)
 	{
 		String[] setDate = new String[]{"2000", "01", "01", "00", "00", "00"};
@@ -217,19 +217,19 @@ public class Time
 				month = "0"+month;
 		} catch(Exception e)
 		{
-			System.out.println("ÇëÊäÈëÕıÈ·¸ñÊ½");
+			System.out.println("è¯·è¾“å…¥æ­£ç¡®æ ¼å¼");
 			System.exit(0);
 		}
 		if(setDate[2].length()!=4 || month.length()!=2 && day.length()!=2)
 		{
-			System.out.println("ÇëÊäÈëÕıÈ·¸ñÊ½");
+			System.out.println("è¯·è¾“å…¥æ­£ç¡®æ ¼å¼");
 			System.exit(0);
 		}
 		
 		return setDate[2]+"/"+month+"/"+day+" "+setDate[3]+":"+setDate[4]+":"+setDate[5];
 	}
 	
-	//×ª»»´¿°¢À­²®Êı×Ö¡¢´¿ÖĞÎÄ¡¢ÖĞÎÄºÍ°¢À­²®Êı×Ö»ìºÏÎª±ê×¼¸ñÊ½
+	//è½¬æ¢çº¯é˜¿æ‹‰ä¼¯æ•°å­—ã€çº¯ä¸­æ–‡ã€ä¸­æ–‡å’Œé˜¿æ‹‰ä¼¯æ•°å­—æ··åˆä¸ºæ ‡å‡†æ ¼å¼
 	public static String convertChnDate(String date)
 	{
 		String[] setDate = new String[]{"2000", "01", "01", "00", "00", "00"};
@@ -249,7 +249,7 @@ public class Time
 				if(res.equals(""))	continue;
 				if(!isContainAmOrPm(res.toLowerCase()))
 				{
-						//ÅĞ¶ÏresÊÇ·ñÊÇÖĞÎÄÊı×Ö¡£
+						//åˆ¤æ–­resæ˜¯å¦æ˜¯ä¸­æ–‡æ•°å­—ã€‚
 					if(isContainChnNum(res))
 						res = chnNumToArbNum(res);
 					else
@@ -281,12 +281,12 @@ public class Time
 			}
 		} catch(Exception e)
 		{
-			System.out.println("ÇëÊäÈëÕıÈ·¸ñÊ½");
+			System.out.println("è¯·è¾“å…¥æ­£ç¡®æ ¼å¼");
 			System.exit(0);
 		}
 		if(setDate[0].length()!=4 || setDate[1].length()!=2 && setDate[2].length()!=2)
 		{
-			System.out.println("ÇëÊäÈëÕıÈ·¸ñÊ½");
+			System.out.println("è¯·è¾“å…¥æ­£ç¡®æ ¼å¼");
 			System.exit(0);
 		}
 		
