@@ -246,15 +246,15 @@ public class Cluster {
 		result_original = new ArrayList<String[]>();
 		for (List<Integer> set : result_int) {
 			int originalIndex = -1;
-			String originalTime = "0000-00-00";
+			String originalTime = Time.convert("0000-00-00") ;
 			if (set.size() == 1) {
 				break;
 			}
 			for (int i : set) {
 				String time = Time.convert(cells.get(i)[timeLine]);
-				if (Time.compare(time, originalTime) > 0) {
+				if (Time.compare(time, originalTime) < 0) {
 					originalIndex = i;
-					originalTime = cells.get(i)[timeLine];
+					originalTime = time;
 				}
 			}
 			result_original.add(cells.get(originalIndex));
