@@ -83,7 +83,7 @@ public class Cluster {
 			throw new IllegalArgumentException("分词列表是空的");
 		}
 		result_int = new ArrayList<List<Integer>>();
-		for (int i = 0; i < list_seg.size(); i++) {
+		for (int i = 1; i < list_seg.size(); i++) {
 			int max_sim_set_index = -1;
 			float max_sim = -1.0f;
 			if (i == 0) {
@@ -107,6 +107,14 @@ public class Cluster {
 				result_int.get(max_sim_set_index).add(i);
 			}
 		}
+		Collections.sort(result_int, new Comparator<List<Integer>>() {
+
+			public int compare(List<Integer> o1, List<Integer> o2) {
+				// TODO Auto-generated method stub
+				return o2.size() - o1.size();
+			}
+
+		});
 	}
 
 	/**
@@ -184,6 +192,7 @@ public class Cluster {
 			return;
 		}
 		result_set_all = new ArrayList<List<String[]>>();
+		int rowLength = cells.get(0).length;
 		for (List<Integer> set : result_int) {
 			List<String[]> list_result_set = new ArrayList<String[]>();
 			for (int i : set) {
@@ -195,20 +204,16 @@ public class Cluster {
 					return o1[tarLine].compareTo(o2[tarLine]);
 				}
 			});
+			list_result_set.add(new String[rowLength]);
 			result_set_all.add(list_result_set);
 		}
-		Collections.sort(result_set_all, new Comparator<List<String[]>>() {
-
-			public int compare(List<String[]> o1, List<String[]> o2) {
-				return o2.size() - o1.size();
-			}
-
-		});
 	}
 
 	private void changeSetToCells() {
 		if (result_set_all == null)
 			return;
+		result_all = new ArrayList<String[]>();
+		result_all.add(cells.get(0));
 		for (List<String[]> list : result_set_all) {
 			for (String[] row : list) {
 				result_all.add(row);
@@ -261,11 +266,18 @@ public class Cluster {
 			process_all();
 		}
 		result_original = new ArrayList<String[]>();
+		String[] firstRow = cells.get(0);
+		String[] newFirstRow = new String[firstRow.length + 1];
+		newFirstRow[0] = "总计";
+		for (int i = 0; i < firstRow.length; i++) {
+			newFirstRow[i + 1] = firstRow[i];
+		}
+		result_original.add(newFirstRow);
 		for (List<Integer> set : result_int) {
 			int originalIndex = -1;
-			String originalTime = Time.convert("0000-00-00");
+			String originalTime = Time.convert("9000-01-01");
 			if (set.size() == 1) {
-				break;
+				continue;
 			}
 			for (int i : set) {
 				String time = Time.convert(cells.get(i)[timeLine]);
