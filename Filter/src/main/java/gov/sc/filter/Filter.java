@@ -21,22 +21,13 @@ public class Filter {
 		String file = "D:\\数据\\政法-法院-政法-检察-政法-公安-政法-司法.xls";
 		ReadFile rf = new ReadFile(file);
 		List<String[]> cells = rf.getCells();
-		Cluster cluster = new Cluster(cells,2,3);
-		List<List<String[]>> result = cluster.getResult_all();
-		logger.info("总共有"+result.size()+"个类");
-		Collections.sort(result, new Comparator<List<String[]>>() {
+		Cluster cluster = new Cluster(cells, 2, 3);
+		List<String[]> result = cluster.getResult_all();
+		logger.info("总共有" + result.size() + "个类");
 
-			public int compare(List<String[]> o1, List<String[]> o2) {
-				// TODO Auto-generated method stub
-				return o2.size()-o1.size();
-			}
-
-		});
-		for (List<String[]> set : result) {
-			for (String[] row : set) {
-				logger.info(row[2]);
-			}
-			logger.info("");
+		for (String[] row : result) {
+			logger.info(row[2]);
 		}
+		logger.info("");
 	}
 }

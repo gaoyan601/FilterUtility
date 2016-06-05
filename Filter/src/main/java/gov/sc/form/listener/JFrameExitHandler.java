@@ -1,6 +1,6 @@
 package gov.sc.form.listener;
 
-import gov.sc.form.Gui;
+import gov.sc.form.Form;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 public class JFrameExitHandler implements WindowListener{
 	private JFrame jFrame;
-	public JFrameExitHandler(Gui gui){
+	public JFrameExitHandler(Form gui){
 		this.jFrame = gui.jFrame;
 	}
 	private void sureExit() {

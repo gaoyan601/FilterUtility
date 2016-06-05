@@ -2,7 +2,7 @@ package gov.sc.form.listener;
 
 import gov.sc.file.WriteFile;
 import gov.sc.filter.Cluster;
-import gov.sc.form.Gui;
+import gov.sc.form.Form;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,43 +18,43 @@ import javax.swing.JProgressBar;
 
 public class BegButHandler implements ActionListener {
 
-	private Gui gui;
-	public List<String[]> map;
+	private Form form;
+	public List<String[]> cells;
 
-	public BegButHandler(Gui gui) {
-		this.gui = gui;
+	public BegButHandler(Form form) {
+		this.form = form;
 
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		String reFile = gui.srcPthTxtFiled.getText().trim();
+		String reFile = form.srcPthTxtFiled.getText().trim();
 		if (reFile == null || reFile.equals("")) {
 			JOptionPane.showMessageDialog(null, "请选择Excel文件");
 			return;
 		}
 		// 获取拖拽时间中的 cell。
-		HandleThread ht = new HandleThread(gui);
+		HandleThread ht = new HandleThread(form);
 		ht.start();
 	}
 
 	static class HandleThread extends Thread {
-		private Gui gui;
+		private Form form;
 		private JProgressBar proBar;
 		private JButton begBut;
 		private JButton scanBut;
 		private JComboBox<String> selectTarCol;
 		private JComboBox<String> selectTarTim;
 		private String reFile;
-		private List<String[]> map;
+		private List<String[]> cells;
 
-		public HandleThread(Gui gui) {
-			this.gui = gui;
-			this.proBar = gui.progressbar;
-			this.begBut = gui.begBut;
-			this.scanBut = gui.scanBut;
-			this.selectTarCol = gui.selectTarCol;
-			this.selectTarTim = gui.selectTarTim;
-			this.reFile = gui.srcPthTxtFiled.getText();
+		public HandleThread(Form form) {
+			this.form = form;
+			this.proBar = form.progressbar;
+			this.begBut = form.begBut;
+			this.scanBut = form.scanBut;
+			this.selectTarCol = form.selectTarCol;
+			this.selectTarTim = form.selectTarTim;
+			this.reFile = form.srcPthTxtFiled.getText();
 
 		}
 
@@ -66,8 +66,8 @@ public class BegButHandler implements ActionListener {
 			scanBut.setEnabled(true);
 		}
 
-		public void get(List<String[]> map) {
-			this.map = map;
+		public void get(List<String[]> cells) {
+			this.cells = cells;
 		}
 
 		@Override
@@ -88,17 +88,17 @@ public class BegButHandler implements ActionListener {
 					return;
 				}
 			}
-			DropDragSupportTextField read = new DropDragSupportTextField(gui);
+			DropDragSupportTextField read = new DropDragSupportTextField(form);
 			begBut.setEnabled(false);
 			scanBut.setEnabled(false);
-			map = read.getCell();
-			int value = map.size();
+			cells = read.getCell();
+			int value = cells.size();
 			proBar.setString("文件解析中...");
 			Cluster cluster;
-			cluster = new Cluster(map, selectTarCol.getSelectedIndex() + 1,
+			cluster = new Cluster(cells, selectTarCol.getSelectedIndex() + 1,
 					read.addItem());
 
-			List<List<String[]>> reList = new ArrayList<List<String[]>>();
+			List<String[]> reList = new ArrayList<String[]>();
 			try {
 				reList = cluster.getResult_all();
 				proBar.setValue(value * 2);
@@ -127,7 +127,7 @@ public class BegButHandler implements ActionListener {
 				write.setFile(reFile.replace(".xls",
 						"(过滤后统计数据" + selectTarCol.getSelectedItem() + "+"
 								+ selectTarTim.getSelectedItem() + ").xls"));
-				reList = cluster.getResultOfCountAndTime();// 统计结果
+				reList = cluster.getResult_original();// 统计结果
 				write.write(reList);
 				proBar.setValue(value * 4);
 			} catch (Exception e) {

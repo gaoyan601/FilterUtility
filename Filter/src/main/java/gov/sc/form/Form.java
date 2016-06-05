@@ -29,7 +29,7 @@ import javax.swing.JTextField;
 
 
 
-public class Gui {
+public class Form {
 	public final JFrame jFrame = new JFrame("过滤器");
 	public final JTextField srcPthTxtFiled = new DropDragSupportTextField(this);
 	public final JComboBox<String> selectTarCol = new JComboBox<String>();

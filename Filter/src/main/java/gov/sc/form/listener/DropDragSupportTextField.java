@@ -1,7 +1,7 @@
 package gov.sc.form.listener;
 
 import gov.sc.file.ReadFile;
-import gov.sc.form.Gui;
+import gov.sc.form.Form;
 
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -14,8 +14,6 @@ import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -23,19 +21,17 @@ import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 
-
 @SuppressWarnings("serial")
 public class DropDragSupportTextField extends JTextField implements
 		DropTargetListener {
-	private Gui gui;
+	private Form gui;
 	public int tarTime;
 	public List<String[]> cell;
-	public DropDragSupportTextField(Gui gui) {
+
+	public DropDragSupportTextField(Form gui) {
 		this.gui = gui;
 		new DropTarget(gui.jFrame, DnDConstants.ACTION_COPY_OR_MOVE, this, true);
 	}
-
-
 
 	public List<String[]> getCell() {
 		JProgressBar proBar = new JProgressBar();
@@ -51,7 +47,7 @@ public class DropDragSupportTextField extends JTextField implements
 		return cell;
 	}
 
-	public int addItem() throws Exception {
+	public int addItem() {
 		JComboBox<String> selectTarCol = new JComboBox<String>();
 		selectTarCol = gui.selectTarCol;
 		JComboBox<String> selectTarTim = new JComboBox<String>();
@@ -92,8 +88,6 @@ public class DropDragSupportTextField extends JTextField implements
 		return tarTime;
 	}
 
-
-
 	public void dragEnter(DropTargetDragEvent dtde) {
 		// TODO Auto-generated method stub
 		DataFlavor[] dataFlavors = dtde.getCurrentDataFlavors();
@@ -106,12 +100,13 @@ public class DropDragSupportTextField extends JTextField implements
 				for (int i = 0; i < files.size(); i++) {
 					gui.srcPthTxtFiled.setText(files.get(i).getAbsolutePath());
 				}
-				if(gui.srcPthTxtFiled.getText().toString().matches(".*xls")||gui.srcPthTxtFiled.getText().toString().matches(".*xlsx")){
+				if (gui.srcPthTxtFiled.getText().toString().matches(".*xls")
+						|| gui.srcPthTxtFiled.getText().toString()
+								.matches(".*xlsx")) {
 					addItem();
-				}else{
+				} else {
 					JOptionPane.showMessageDialog(null, "请选择Excel文件");
 				}
-				
 
 			} catch (UnsupportedFlavorException ex) {
 
@@ -123,34 +118,24 @@ public class DropDragSupportTextField extends JTextField implements
 		}
 	}
 
-
-
 	public void dragOver(DropTargetDragEvent dtde) {
 		// TODO Auto-generated method stub
-		
+
 	}
-
-
 
 	public void dropActionChanged(DropTargetDragEvent dtde) {
 		// TODO Auto-generated method stub
-		
+
 	}
-
-
 
 	public void dragExit(DropTargetEvent dte) {
 		// TODO Auto-generated method stub
-		
+
 	}
-
-
 
 	public void drop(DropTargetDropEvent dtde) {
 		// TODO Auto-generated method stub
-		
-	}
 
-	
+	}
 
 }
