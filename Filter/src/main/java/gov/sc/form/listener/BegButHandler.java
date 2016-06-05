@@ -3,7 +3,7 @@ package gov.sc.form.listener;
 import org.apache.log4j.Logger;
 
 import gov.sc.file.ReadExcelFile;
-import gov.sc.file.WriteFile;
+import gov.sc.file.WriteExcelFile;
 import gov.sc.filter.Cluster;
 import gov.sc.form.MainForm;
 
@@ -100,7 +100,7 @@ public class BegButHandler implements ActionListener {
 			Cluster cluster = new Cluster(cells, tarline, timeline);
 			List<String[]> reList = cluster.getResult_all();
 			proBar.setValue(value * 2);
-			WriteFile write = new WriteFile(reFile.replace(".xls",
+			WriteExcelFile write = new WriteExcelFile(reFile.replace(".xls",
 					"(过滤后所有数据" + selectTarCol.getSelectedItem() + "+"
 							+ selectTarTim.getSelectedItem() + ").xls"));
 			try {
