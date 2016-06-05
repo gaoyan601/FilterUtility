@@ -10,3 +10,7 @@
 [INFO][2016-06-05 22:16:11,937][DICLOG]init ambiguityLibrary ok!
 [INFO][2016-06-05 22:16:13,545][DICLOG]init core library ok use time :1592
 [INFO][2016-06-05 22:16:14,092][DICLOG]init ngram ok use time :531
+[INFO][2016-06-05 22:16:11,937][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 22:16:11,937][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 22:16:13,545][DICLOG]init core library ok use time :1592
+[INFO][2016-06-05 22:16:14,092][DICLOG]init ngram ok use time :531
