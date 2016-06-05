@@ -1,5 +1,7 @@
 package gov.sc.form.listener;
 
+import gov.sc.form.ConfForm;
+
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
@@ -14,7 +16,7 @@ import javax.swing.JTextArea;
 public class ExitHandler implements WindowListener {
 	JFrame jFrame;
 	JTextArea jTextArea;
-	public ExitHandler(ConfMiHandler con) {
+	public ExitHandler(ConfForm con) {
 		this.jTextArea = con.jTextArea;
 		this.jFrame = con.jFrame;
 		
