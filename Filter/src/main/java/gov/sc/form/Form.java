@@ -30,8 +30,8 @@ import javax.swing.JTextField;
 public class Form {
 	public final JFrame jFrame = new JFrame("过滤器");
 	public final JTextField srcPthTxtFiled = new DropDragSupportTextField(this);
-	public final JComboBox<String> selectTarCol = new JComboBox<String>();
-	public final JComboBox<String> selectTarTim = new JComboBox<String>();
+	public final JComboBox selectTarCol = new JComboBox();
+	public final JComboBox selectTarTim = new JComboBox();
 	public final JButton scanBut = new JButton("浏览");
 	public final JButton begBut = new JButton("开始");
 	public final JProgressBar progressbar = new JProgressBar(0, 1000);

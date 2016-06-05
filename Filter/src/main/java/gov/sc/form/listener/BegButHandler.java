@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -41,8 +40,8 @@ public class BegButHandler implements ActionListener {
 		private JProgressBar proBar;
 		private JButton begBut;
 		private JButton scanBut;
-		private JComboBox<String> selectTarCol;
-		private JComboBox<String> selectTarTim;
+		private JComboBox selectTarCol;
+		private JComboBox selectTarTim;
 		private String reFile;
 		private List<String[]> cells;
 		private int tarline;

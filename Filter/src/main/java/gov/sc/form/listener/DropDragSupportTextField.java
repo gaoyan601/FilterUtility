@@ -69,9 +69,9 @@ public class DropDragSupportTextField extends JTextField implements
 		return getCell;
 	}
 	public void addItem() {
-		JComboBox<String> selectTarCol = new JComboBox<String>();
+		JComboBox selectTarCol = new JComboBox();
 		selectTarCol = gui.selectTarCol;
-		JComboBox<String> selectTarTim = new JComboBox<String>();
+		JComboBox selectTarTim = new JComboBox();
 		selectTarTim = gui.selectTarTim;
 		JProgressBar proBar = new JProgressBar();
 		proBar = gui.progressbar;
