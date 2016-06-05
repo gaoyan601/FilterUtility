@@ -86,8 +86,8 @@ public class BegButHandler implements ActionListener {
 			}
 			begBut.setEnabled(false);
 			scanBut.setEnabled(false);
-			ReadExcelFile ref = ReadExcelFile.getInstance(reFile);
 			try {
+				ReadExcelFile ref = ReadExcelFile.getInstance(reFile);
 				cells = ref.getCells();
 			} catch (Exception e) {
 				logger.info("read Excel file error---->" + e.toString());
