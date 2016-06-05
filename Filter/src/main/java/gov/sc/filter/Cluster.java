@@ -190,6 +190,7 @@ public class Cluster {
 			return;
 		}
 		result_set_all = new ArrayList<List<String[]>>();
+		
 		for (List<Integer> set : result_int) {
 			List<String[]> list_result_set = new ArrayList<String[]>();
 			for (int i : set) {
@@ -209,9 +210,8 @@ public class Cluster {
 		if (result_set_all == null)
 			return;
 		result_all = new ArrayList<String[]>();
-		result_all.add(cells.get(0)); // 添加源数据的第一行（列名）
+		result_all.add(cells.get(0));
 		int rowLength = cells.get(0).length;
-
 		for (List<String[]> list : result_set_all) {
 			for (String[] row : list) {
 				result_all.add(row);
@@ -268,7 +268,6 @@ public class Cluster {
 			process_all();
 		}
 		result_original = new ArrayList<String[]>();
-
 		/**
 		 * 添加第一行（列名），并在最开始插入"总计"列
 		 */
