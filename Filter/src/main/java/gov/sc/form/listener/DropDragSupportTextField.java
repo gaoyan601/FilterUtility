@@ -1,11 +1,12 @@
 package gov.sc.form.listener;
 
-import gov.sc.file.ReadFile;
+import org.apache.log4j.Logger;
+
+import gov.sc.file.ReadExcelFile;
 import gov.sc.form.MainForm;
 
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDragEvent;
@@ -13,63 +14,50 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class DropDragSupportTextField extends JTextField implements
 		DropTargetListener {
-	private MainForm gui;
-	public int tarTime;
-	public List<String[]> cell;
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = Logger
+			.getLogger(DropDragSupportTextField.class);
 
-	public DropDragSupportTextField(MainForm gui) {
-		this.gui = gui;
-		new DropTarget(gui.jFrame, DnDConstants.ACTION_COPY_OR_MOVE, this, true);
+	private MainForm form;
+
+	public DropDragSupportTextField(MainForm form) {
+		this.form = form;
+		new DropTarget(form.jFrame, DnDConstants.ACTION_COPY_OR_MOVE, this,
+				true);
 	}
 
-	public List<String[]> getCell() {
-		JProgressBar proBar = new JProgressBar();
-		proBar = gui.progressbar;
-		ReadFile read = new ReadFile(gui.srcPthTxtFiled.getText());
-		try {
-			cell = read.getCells();
-		} catch (Exception e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "文件读取失败");
-			proBar.setString("文件读取失败");
-		}
-		return cell;
-	}
-
-	public void addItem() {
-		JComboBox selectTarCol = new JComboBox();
-		selectTarCol = gui.selectTarCol;
-		JComboBox selectTarTim = new JComboBox();
-		selectTarTim = gui.selectTarTim;
-		JProgressBar proBar = new JProgressBar();
-		proBar = gui.progressbar;
+	private void addItem() throws FileNotFoundException, IOException {
+		JComboBox<String> selectTarCol = form.selectTarCol;
+		JComboBox<String> selectTarTim = form.selectTarTim;
+		JProgressBar proBar = form.progressbar;
 		selectTarCol.removeAllItems();
 		selectTarTim.removeAllItems();
-		getCell();
-		proBar.setMaximum(cell.size() * 4);
-		proBar.setValue(cell.size());
+		List<String[]> cells = ReadExcelFile.getInstance(
+				form.srcPthTxtFiled.getText()).getCells();
+		proBar.setMaximum(cells.size() * 4);
+		proBar.setValue(cells.size());
 		proBar.setString("文件读取成功");
-		String[] list;
-		list = getCell().get(0);
-		for (String elements : list) {
-			if (elements.length() >= 5) {
-				selectTarCol.addItem((String) elements.substring(0, 4) + "...");
-				selectTarTim.addItem((String) elements.substring(0, 4) + "...");
+		String[] list = cells.get(0);
+		for (String element : list) {
+			if (element.length() >= 5) {
+				selectTarCol.addItem((String) element.substring(0, 4) + "...");
+				selectTarTim.addItem((String) element.substring(0, 4) + "...");
 			} else {
-				selectTarCol.addItem(elements);
-				selectTarTim.addItem(elements);
+				selectTarCol.addItem(element);
+				selectTarTim.addItem(element);
 			}
 		}
 	}
@@ -83,23 +71,13 @@ public class DropDragSupportTextField extends JTextField implements
 				Object obj = tr.getTransferData(DataFlavor.javaFileListFlavor);
 				@SuppressWarnings("unchecked")
 				List<File> files = (List<File>) obj;
-				for (int i = 0; i < files.size(); i++) {
-					gui.srcPthTxtFiled.setText(files.get(i).getAbsolutePath());
-				}
-				if (gui.srcPthTxtFiled.getText().toString().matches(".*xls")
-						|| gui.srcPthTxtFiled.getText().toString()
-								.matches(".*xlsx")) {
+				String fileName = files.get(files.size() - 1).getAbsolutePath();
+				form.srcPthTxtFiled.setText(fileName);
+				if (fileName.matches(".*xls") || fileName.matches(".*xlsx")) {
 					addItem();
-				} else {
-					JOptionPane.showMessageDialog(null, "请选择Excel文件");
 				}
-
-			} catch (UnsupportedFlavorException ex) {
-
-			} catch (IOException ex) {
 			} catch (Exception e) {
-
-				e.printStackTrace();
+				logger.info("init file error--->" + e.toString());
 			}
 		}
 	}
