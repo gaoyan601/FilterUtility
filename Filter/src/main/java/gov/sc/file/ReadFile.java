@@ -15,7 +15,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * 该类继承自File类
  * 
  * @author Kevin
- *
+ * 
  */
 public class ReadFile {
 
@@ -45,9 +45,8 @@ public class ReadFile {
 	 * 
 	 * @return 返回得到的list
 	 * @throws IOException
-	 * @throws FileNotFoundException
 	 */
-	public void readCells() throws FileNotFoundException, IOException {
+	public void readCells() throws IOException {
 		cells = new ArrayList<String[]>();
 		Workbook workbook;
 		if (file.endsWith(".xls")) {
@@ -57,11 +56,15 @@ public class ReadFile {
 		}
 		Sheet sheet = workbook.getSheetAt(0);
 		int rowNum = sheet.getLastRowNum();
-		int colNum = sheet.getRow(0).getPhysicalNumberOfCells();
-		for (int i = 0; i < rowNum; i++) {
+		int colNum = sheet.getRow(0).getLastCellNum();
+		for (int i = 0; i <= rowNum; i++) {
 			String[] rowStr = new String[colNum];
 			for (int j = 0; j < colNum; j++) {
-				rowStr[j] = sheet.getRow(i).getCell(j).toString();
+				try {
+					rowStr[j] = sheet.getRow(i).getCell(j).toString();
+				} catch (Exception e) {
+					rowStr[j] = "";
+				}
 			}
 			cells.add(rowStr);
 		}
@@ -76,8 +79,7 @@ public class ReadFile {
 		this.file = file;
 	}
 
-	public List<String[]> getCells()
-			throws FileNotFoundException, IOException {
+	public List<String[]> getCells() throws FileNotFoundException, IOException {
 		if (cells == null) {
 			readCells();
 		}

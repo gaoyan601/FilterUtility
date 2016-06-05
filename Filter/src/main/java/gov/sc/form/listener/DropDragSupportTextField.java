@@ -48,7 +48,7 @@ public class DropDragSupportTextField extends JTextField implements
 		return cell;
 	}
 	//得到第一行数据
-	public String[]getFirst(){
+	public String[] getFirst(){
 		List<String[]> getAllCell = new ArrayList<String[]>();
 		String[] firElem;
 		getAllCell = getCell();
