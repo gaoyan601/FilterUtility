@@ -1,7 +1,7 @@
 package gov.sc.form.listener;
 
 import gov.sc.file.ReadFile;
-import gov.sc.form.Form;
+import gov.sc.form.MainForm;
 
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -25,11 +25,11 @@ import javax.swing.JTextField;
 @SuppressWarnings("serial")
 public class DropDragSupportTextField extends JTextField implements
 		DropTargetListener {
-	private Form gui;
+	private MainForm gui;
 	public int tarTime;
 	public List<String[]> cell;
 
-	public DropDragSupportTextField(Form gui) {
+	public DropDragSupportTextField(MainForm gui) {
 		this.gui = gui;
 		new DropTarget(gui.jFrame, DnDConstants.ACTION_COPY_OR_MOVE, this, true);
 	}

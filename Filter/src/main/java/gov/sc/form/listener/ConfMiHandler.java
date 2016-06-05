@@ -23,9 +23,8 @@ public class ConfMiHandler implements ActionListener {
 	JTextArea jTextArea;
 	JScrollPane jScrollPane;
 
-	public void setForm() {
+	private void setForm() {
 		if (jFrame == null) {
-
 			jFrame = new JFrame("停用词配置");
 		}
 		Container contentPane = jFrame.getContentPane();
@@ -38,13 +37,13 @@ public class ConfMiHandler implements ActionListener {
 		jTextArea.setLineWrap(true);
 		jTextArea.setWrapStyleWord(true);
 		jTextArea.setEditable(true);
-		String elements = null;
+		String content = null;
 		try {
-			elements = readTxt();
+			content = readTxt();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		jTextArea.setText(elements);
+		jTextArea.setText(content);
 		jScrollPane = new JScrollPane(jTextArea);
 		contentPane.add(jScrollPane, BorderLayout.CENTER);
 		jFrame.setEnabled(true);
@@ -53,45 +52,32 @@ public class ConfMiHandler implements ActionListener {
 		jFrame.setLocation(400, 200);
 		jFrame.setVisible(true);
 		jFrame.requestFocus();
-		jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		jFrame.addWindowListener(new ExitHandler(this));
-		
-	}
-
-	public String getString(List<String> list) {
-		String elements = list.get(0);
-		for (int i = 1; i < list.size(); i++) {
-			elements = elements + "\n" + list.get(i);
-		}
-		return elements;
 	}
 
 	// 读取txt文件
-	public String readTxt() throws Exception {
-		List<String> list = new ArrayList<String>();
-		String lineTxt = null;
-		String elements = null;
+	private String readTxt() throws Exception {
+		StringBuilder sb = new StringBuilder();
+		String line = "";
 		String encoding = "utf-8";
 		File file = new File("././library/stopwords.dic");
 		if (file.isFile() && file.exists()) { // 判断文件是否存在
 			InputStreamReader read = new InputStreamReader(new FileInputStream(
 					file), encoding);// 考虑到编码格式
 			BufferedReader bufferedReader = new BufferedReader(read);
-			while ((lineTxt = bufferedReader.readLine()) != null) {
-				list.add(lineTxt);
+			while ((line = bufferedReader.readLine()) != null) {
+				sb.append(line);
+				sb.append("\n");
 			}
-			elements = getString(list);
 			read.close();
-
 		} else {
 			System.out.println("找不到指定的文件");
 		}
-		return elements;
-
+		return sb.toString();
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		setForm();
-		
 	}
 }

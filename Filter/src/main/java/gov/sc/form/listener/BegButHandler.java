@@ -2,7 +2,7 @@ package gov.sc.form.listener;
 
 import gov.sc.file.WriteFile;
 import gov.sc.filter.Cluster;
-import gov.sc.form.Form;
+import gov.sc.form.MainForm;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,10 +17,10 @@ import javax.swing.JProgressBar;
 
 public class BegButHandler implements ActionListener {
 
-	private Form form;
+	private MainForm form;
 	public List<String[]> cells;
 
-	public BegButHandler(Form form) {
+	public BegButHandler(MainForm form) {
 		this.form = form;
 
 	}
@@ -36,7 +36,7 @@ public class BegButHandler implements ActionListener {
 	}
 
 	static class HandleThread extends Thread {
-		private Form form;
+		private MainForm form;
 		private JProgressBar proBar;
 		private JButton begBut;
 		private JButton scanBut;
@@ -46,7 +46,7 @@ public class BegButHandler implements ActionListener {
 		private List<String[]> cells;
 		private int tarline;
 		private int timeline;
-		public HandleThread(Form form) {
+		public HandleThread(MainForm form) {
 			this.form = form;
 			this.proBar = form.progressbar;
 			this.begBut = form.begBut;

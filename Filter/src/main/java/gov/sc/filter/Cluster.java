@@ -264,7 +264,7 @@ public class Cluster {
 		result_original = new ArrayList<String[]>();
 		for (List<Integer> set : result_int) {
 			int originalIndex = -1;
-			String originalTime = Time.convert("0000-00-00");
+			String originalTime = Time.convert("1000-00-00");
 			if (set.size() == 1) {
 				break;
 			}

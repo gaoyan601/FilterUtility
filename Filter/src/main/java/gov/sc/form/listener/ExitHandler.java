@@ -19,7 +19,7 @@ public class ExitHandler implements WindowListener {
 		this.jFrame = con.jFrame;
 		
 	}
-	public void write() {
+	private void write() {
 		BufferedWriter writer = null;
 		try {
 			writer = new BufferedWriter(new FileWriter(new File(
@@ -43,17 +43,16 @@ public class ExitHandler implements WindowListener {
 
 	public void windowClosing(WindowEvent e) {
 		// TODO Auto-generated method stub
-		int result = JOptionPane.showConfirmDialog(null, "是否退出程序");
+		int result = JOptionPane.showConfirmDialog(null, "是否保存文件");
 		if (result == JOptionPane.YES_OPTION) {
 			write();
 			jFrame.dispose();
-		}else{
-			return;
 		}
 	}
 
 	public void windowClosed(WindowEvent e) {
 		// TODO Auto-generated method stub
+		
 	}
 
 	public void windowIconified(WindowEvent e) {

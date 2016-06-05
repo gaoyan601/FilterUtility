@@ -1,6 +1,6 @@
 package gov.sc.form.listener;
 
-import gov.sc.form.Form;
+import gov.sc.form.MainForm;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,9 +14,9 @@ import javax.swing.filechooser.FileFilter;
 
 public class ScanButHandler implements ActionListener {
 
-	private Form gui;
+	private MainForm gui;
 
-	public ScanButHandler(Form gui) {
+	public ScanButHandler(MainForm gui) {
 		this.gui = gui;
 	}
 
