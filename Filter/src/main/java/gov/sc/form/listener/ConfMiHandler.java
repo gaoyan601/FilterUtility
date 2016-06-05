@@ -26,12 +26,22 @@ public class ConfMiHandler implements ActionListener {
 	private void setForm() {
 		if (jFrame == null) {
 			jFrame = new JFrame("停用词配置");
+			jTextArea = new JTextArea();
+			jFrame.addWindowListener(new ExitHandler(this));
+			jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		}
+		jScrollPane = new JScrollPane(jTextArea);
 		Container contentPane = jFrame.getContentPane();
 		contentPane.setLayout(new BorderLayout());
+		contentPane.add(jScrollPane, BorderLayout.CENTER);
+		jFrame.setEnabled(true);
+		jFrame.setState(Frame.NORMAL);
+		jFrame.setSize(520, 430);
+		jFrame.setLocation(400, 200);
+		jFrame.setVisible(true);
+		jFrame.requestFocus();
 		ImageIcon icon = new ImageIcon("./src/main/resources/image/filter.jpg");
 		jFrame.setIconImage(icon.getImage());
-		jTextArea = new JTextArea();
 		jTextArea.setTabSize(4);
 		jTextArea.setFont(new Font("宋体", Font.BOLD, 13));
 		jTextArea.setLineWrap(true);
@@ -44,16 +54,6 @@ public class ConfMiHandler implements ActionListener {
 			e.printStackTrace();
 		}
 		jTextArea.setText(content);
-		jScrollPane = new JScrollPane(jTextArea);
-		contentPane.add(jScrollPane, BorderLayout.CENTER);
-		jFrame.setEnabled(true);
-		jFrame.setState(Frame.NORMAL);
-		jFrame.setSize(520, 430);
-		jFrame.setLocation(400, 200);
-		jFrame.setVisible(true);
-		jFrame.requestFocus();
-		jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		jFrame.addWindowListener(new ExitHandler(this));
 	}
 
 	// 读取txt文件
