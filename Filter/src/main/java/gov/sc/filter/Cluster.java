@@ -209,6 +209,7 @@ public class Cluster {
 	private void changeSetToCells() {
 		if (result_set_all == null)
 			return;
+		result_all = new ArrayList<String[]>();
 		for (List<String[]> list : result_set_all) {
 			for (String[] row : list) {
 				result_all.add(row);

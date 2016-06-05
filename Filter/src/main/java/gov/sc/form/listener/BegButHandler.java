@@ -32,7 +32,6 @@ public class BegButHandler implements ActionListener {
 			JOptionPane.showMessageDialog(null, "请选择Excel文件");
 			return;
 		}
-		// 获取拖拽时间中的 cell。
 		HandleThread ht = new HandleThread(form);
 		ht.start();
 	}
@@ -46,7 +45,8 @@ public class BegButHandler implements ActionListener {
 		private JComboBox<String> selectTarTim;
 		private String reFile;
 		private List<String[]> cells;
-
+		private int tarline;
+		private int timeline;
 		public HandleThread(Form form) {
 			this.form = form;
 			this.proBar = form.progressbar;
@@ -91,13 +91,13 @@ public class BegButHandler implements ActionListener {
 			DropDragSupportTextField read = new DropDragSupportTextField(form);
 			begBut.setEnabled(false);
 			scanBut.setEnabled(false);
-			cells = read.getCell();
+			cells = read.getElement();
 			int value = cells.size();
 			proBar.setString("文件解析中...");
 			Cluster cluster;
-			cluster = new Cluster(cells, selectTarCol.getSelectedIndex() + 1,
-					read.addItem());
-
+			tarline = selectTarCol.getSelectedIndex();
+			timeline = selectTarTim.getSelectedIndex();
+			cluster = new Cluster(cells, tarline,timeline);
 			List<String[]> reList = new ArrayList<String[]>();
 			try {
 				reList = cluster.getResult_all();
@@ -115,8 +115,13 @@ public class BegButHandler implements ActionListener {
 			write.setFile(reFile.replace(".xls",
 					"(过滤后所有数据" + selectTarCol.getSelectedItem() + "+"
 							+ selectTarTim.getSelectedItem() + ").xls"));
+			List<String[]> allCell = new ArrayList<String[]>();
+			allCell.add(read.getFirst());
+			for(int i =1;i<reList.size();i++){
+				allCell.add(reList.get(i));
+			}
 			try {
-				write.write(reList);
+				write.write(allCell);
 				proBar.setValue(value * 3);
 			} catch (Exception e1) {
 				e1.printStackTrace();

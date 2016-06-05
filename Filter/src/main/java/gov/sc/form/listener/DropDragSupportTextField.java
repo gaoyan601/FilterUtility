@@ -14,6 +14,7 @@ import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -46,8 +47,28 @@ public class DropDragSupportTextField extends JTextField implements
 		}
 		return cell;
 	}
-
-	public int addItem() {
+	//得到第一行数据
+	public String[]getFirst(){
+		List<String[]> getAllCell = new ArrayList<String[]>();
+		String[] firElem;
+		getAllCell = getCell();
+		firElem = getAllCell.get(0);
+		return firElem;
+	}
+	//得到除了第一行的数据
+	public List<String[]> getElement(){
+		List<String[]> getAllCell = new ArrayList<String[]>();
+		List<String[]> getCell = new ArrayList<String[]>();
+		String[] elements;
+		getAllCell = getCell();
+		for(int i=1;i<getAllCell.size();i++){
+			elements = getAllCell.get(i);
+			getCell.add(elements);
+		}
+		
+		return getCell;
+	}
+	public void addItem() {
 		JComboBox<String> selectTarCol = new JComboBox<String>();
 		selectTarCol = gui.selectTarCol;
 		JComboBox<String> selectTarTim = new JComboBox<String>();
@@ -65,27 +86,12 @@ public class DropDragSupportTextField extends JTextField implements
 		for (String elements : list) {
 			if (elements.length() >= 5) {
 				selectTarCol.addItem((String) elements.substring(0, 4) + "...");
-			} else {
-				selectTarCol.addItem(elements);
-			}
-		}
-		for (int i = 0; i < list.length; i++) {
-			if (list[i].matches(".*时间.*") || list[i].matches(".*日期.*")) {
-				String elements = list[0];
-				list[0] = list[i];
-				list[i] = elements;
-				tarTime = i;
-			}
-		}
-		for (String elements : list) {
-			if (elements.length() >= 5) {
 				selectTarTim.addItem((String) elements.substring(0, 4) + "...");
 			} else {
+				selectTarCol.addItem(elements);
 				selectTarTim.addItem(elements);
 			}
 		}
-
-		return tarTime;
 	}
 
 	public void dragEnter(DropTargetDragEvent dtde) {

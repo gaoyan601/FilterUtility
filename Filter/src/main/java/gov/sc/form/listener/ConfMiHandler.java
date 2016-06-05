@@ -20,7 +20,7 @@ import javax.swing.JTextArea;
 
 public class ConfMiHandler implements ActionListener {
 	JFrame jFrame ;
-	JTextArea jTextArea = null;
+	JTextArea jTextArea;
 	JScrollPane jScrollPane;
 
 	public void setForm() {
@@ -30,7 +30,7 @@ public class ConfMiHandler implements ActionListener {
 		}
 		Container contentPane = jFrame.getContentPane();
 		contentPane.setLayout(new BorderLayout());
-		ImageIcon icon = new ImageIcon("./main/resources/image/filter.jpg");
+		ImageIcon icon = new ImageIcon("./src/main/resources/image/filter.jpg");
 		jFrame.setIconImage(icon.getImage());
 		jTextArea = new JTextArea();
 		jTextArea.setTabSize(4);
@@ -45,7 +45,6 @@ public class ConfMiHandler implements ActionListener {
 			e.printStackTrace();
 		}
 		jTextArea.setText(elements);
-		jTextArea.getDocument().addDocumentListener(new ContextListener(this));
 		jScrollPane = new JScrollPane(jTextArea);
 		contentPane.add(jScrollPane, BorderLayout.CENTER);
 		jFrame.setEnabled(true);

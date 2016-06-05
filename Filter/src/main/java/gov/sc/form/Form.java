@@ -27,13 +27,11 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 
-
-
 public class Form {
 	public final JFrame jFrame = new JFrame("过滤器");
 	public final JTextField srcPthTxtFiled = new DropDragSupportTextField(this);
 	public final JComboBox<String> selectTarCol = new JComboBox<String>();
-	public final JComboBox<String> selectTarTim = new JComboBox<String>();	
+	public final JComboBox<String> selectTarTim = new JComboBox<String>();
 	public final JButton scanBut = new JButton("浏览");
 	public final JButton begBut = new JButton("开始");
 	public final JProgressBar progressbar = new JProgressBar(0, 1000);
@@ -43,7 +41,6 @@ public class Form {
 	public final JMenuItem openMI = new JMenuItem("打开");
 	public final JMenuItem exitMI = new JMenuItem("退出");
 	public final JMenuItem confMI = new JMenuItem("配置");
-
 	public final JLabel selectFile = new JLabel("请选择文本:");
 	public final JLabel selectCol = new JLabel("目标列:");
 	public final JLabel selectTim = new JLabel("时间列:");
@@ -85,11 +82,11 @@ public class Form {
 		selectCol.setFont(new Font("宋体", Font.BOLD, 18));
 		selectTim.setFont(new Font("宋体", Font.BOLD, 18));
 		begBut.setFont(new Font("宋体", Font.BOLD, 15));
-		openMI.setIcon(new ImageIcon("./main/resources/image/open.jpg"));// xiugai
-		exitMI.setIcon(new ImageIcon("./main/resources/image/exit.jpg"));
-		helpMI.setIcon(new ImageIcon("./main/resources/image/help.jpg"));
-		confMI.setIcon(new ImageIcon("./main/resources/image/config.png"));
-		ImageIcon icon = new ImageIcon("./main/resources/image/filter.jpg");
+		openMI.setIcon(new ImageIcon("./src/main/resources/image/open.jpg"));// xiugai
+		exitMI.setIcon(new ImageIcon("./src/main/resources/image/exit.jpg"));
+		helpMI.setIcon(new ImageIcon("./src/main/resources/image/help.jpg"));
+		confMI.setIcon(new ImageIcon("./src/main/resources/image/config.png"));
+		ImageIcon icon = new ImageIcon("./src/main/resources/image/filter.jpg");
 		jFrame.setIconImage(icon.getImage());
 		srcPthTxtFiled.setEditable(false);
 		jFrame.pack();
@@ -97,14 +94,14 @@ public class Form {
 		jFrame.setBounds(new Rectangle(320, 290, 540, 200));
 		jFrame.setResizable(false);// 大小不变
 		jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		jFrame.addWindowListener(new JFrameExitHandler(this));
-		
+
 	}
 
 	public void setListener() {
+		jFrame.addWindowListener(new JFrameExitHandler());
 		helpMI.addActionListener(new HelpMiHandler());// 类名
 		confMI.addActionListener(new ConfMiHandler());
-		exitMI.addActionListener(new ExitMiHandler(this));
+		exitMI.addActionListener(new ExitMiHandler());
 		openMI.addActionListener(new OpenMiHandler(this));
 		scanBut.addActionListener(new ScanButHandler(this));
 		begBut.addActionListener(new BegButHandler(this));
