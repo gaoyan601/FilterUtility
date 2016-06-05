@@ -6,8 +6,6 @@ import gov.sc.file.ReadFile;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class Filter {

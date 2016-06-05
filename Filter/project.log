@@ -8611,6 +8611,84 @@
 [INFO][2016-06-02 16:03:06,587][DICLOG]init ambiguityLibrary ok!
 [INFO][2016-06-02 16:03:07,481][DICLOG]init core library ok use time :878
 [INFO][2016-06-02 16:03:09,930][DICLOG]init ngram ok use time :2442
+<<<<<<< HEAD
+[INFO][2016-06-05 13:00:45,622][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:00:45,661][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:00:46,444][DICLOG]init core library ok use time :773
+[INFO][2016-06-05 13:00:48,120][DICLOG]init ngram ok use time :1668
+[INFO][2016-06-05 13:01:56,939][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:01:56,941][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:01:57,616][DICLOG]init core library ok use time :663
+[INFO][2016-06-05 13:01:59,186][DICLOG]init ngram ok use time :1564
+[INFO][2016-06-05 13:03:36,924][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:03:36,926][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:03:38,585][DICLOG]init core library ok use time :1649
+[INFO][2016-06-05 13:03:39,926][DICLOG]init ngram ok use time :1335
+[INFO][2016-06-05 13:05:32,226][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:05:32,228][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:05:32,973][DICLOG]init core library ok use time :734
+[INFO][2016-06-05 13:05:34,498][DICLOG]init ngram ok use time :1519
+[INFO][2016-06-05 13:08:36,046][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:08:36,048][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:08:37,811][DICLOG]init core library ok use time :1748
+[INFO][2016-06-05 13:08:38,398][DICLOG]init ngram ok use time :580
+[INFO][2016-06-05 13:08:57,647][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:08:57,649][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:08:58,390][DICLOG]init core library ok use time :730
+[INFO][2016-06-05 13:08:59,982][DICLOG]init ngram ok use time :1585
+[INFO][2016-06-05 13:12:22,790][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:12:22,793][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:12:43,305][DICLOG]init core library ok use time :20461
+[INFO][2016-06-05 13:13:17,993][DICLOG]init ngram ok use time :34515
+[INFO][2016-06-05 13:16:00,404][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:16:00,406][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:16:01,213][DICLOG]init core library ok use time :797
+[INFO][2016-06-05 13:16:02,808][DICLOG]init ngram ok use time :1589
+[INFO][2016-06-05 13:18:02,476][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:18:02,478][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:18:04,192][DICLOG]init core library ok use time :1703
+[INFO][2016-06-05 13:18:05,741][DICLOG]init ngram ok use time :1542
+[INFO][2016-06-05 13:22:38,427][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:22:38,431][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:22:39,290][DICLOG]init core library ok use time :847
+[INFO][2016-06-05 13:22:40,837][DICLOG]init ngram ok use time :1541
+[INFO][2016-06-05 13:25:11,021][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:25:11,023][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:25:12,769][DICLOG]init core library ok use time :1735
+[INFO][2016-06-05 13:25:13,342][DICLOG]init ngram ok use time :567
+[INFO][2016-06-05 13:26:34,423][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:26:34,424][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:26:36,072][DICLOG]init core library ok use time :1636
+[INFO][2016-06-05 13:26:37,478][DICLOG]init ngram ok use time :1399
+[INFO][2016-06-05 13:30:39,041][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:30:39,043][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:30:39,771][DICLOG]init core library ok use time :718
+[INFO][2016-06-05 13:30:41,351][DICLOG]init ngram ok use time :1573
+[INFO][2016-06-05 13:34:10,290][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:34:10,291][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:34:10,970][DICLOG]init core library ok use time :669
+[INFO][2016-06-05 13:34:12,415][DICLOG]init ngram ok use time :1439
+[INFO][2016-06-05 13:40:18,519][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:40:18,521][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:40:19,323][DICLOG]init core library ok use time :792
+[INFO][2016-06-05 13:40:20,906][DICLOG]init ngram ok use time :1577
+[INFO][2016-06-05 13:51:07,087][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:51:07,089][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:51:07,804][DICLOG]init core library ok use time :706
+[INFO][2016-06-05 13:51:09,327][DICLOG]init ngram ok use time :1516
+[INFO][2016-06-05 13:54:35,116][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:54:35,117][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:54:35,800][DICLOG]init core library ok use time :673
+[INFO][2016-06-05 13:54:37,356][DICLOG]init ngram ok use time :1550
+[INFO][2016-06-05 13:55:41,161][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 13:55:41,162][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 13:55:41,856][DICLOG]init core library ok use time :684
+[INFO][2016-06-05 13:55:43,358][DICLOG]init ngram ok use time :1496
+[INFO][2016-06-05 15:36:12,335][DICLOG]init user userLibrary ok path is : E:\Workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 15:36:12,335][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 15:36:13,911][DICLOG]init core library ok use time :1561
+[INFO][2016-06-05 15:36:14,458][DICLOG]init ngram ok use time :547
+=======
 [INFO][2016-06-05 11:02:02,419][DICLOG]init user userLibrary ok path is : E:\workspace\FilterUtility\Filter\library\default.dic
 [INFO][2016-06-05 11:02:02,421][DICLOG]init ambiguityLibrary ok!
 [INFO][2016-06-05 11:02:03,464][DICLOG]init core library ok use time :1027
@@ -8739,6 +8817,7 @@
 [INFO][2016-06-05 17:43:53,738][DICLOG]init ambiguityLibrary ok!
 [INFO][2016-06-05 17:43:55,644][DICLOG]init core library ok use time :1894
 [INFO][2016-06-05 17:43:56,228][DICLOG]init ngram ok use time :561
+<<<<<<< HEAD
 [INFO][2016-06-05 20:47:10,897][DICLOG]init user userLibrary ok path is : E:\workspace\FilterUtility\Filter\library\default.dic
 [INFO][2016-06-05 20:47:10,913][DICLOG]init ambiguityLibrary ok!
 [INFO][2016-06-05 20:47:11,678][DICLOG]init core library ok use time :749
@@ -8751,3 +8830,14 @@
 [INFO][2016-06-05 20:58:51,065][DICLOG]init ambiguityLibrary ok!
 [INFO][2016-06-05 20:59:09,710][DICLOG]init core library ok use time :18597
 [INFO][2016-06-05 20:59:42,301][DICLOG]init ngram ok use time :32434
+=======
+>>>>>>> refs/heads/zzz
+>>>>>>> refs/heads/gaoyan
+[INFO][2016-06-05 21:07:45,722][DICLOG]init user userLibrary ok path is : E:\workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 21:07:45,722][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 21:07:47,455][DICLOG]init core library ok use time :1717
+[INFO][2016-06-05 21:07:48,095][DICLOG]init ngram ok use time :640
+[INFO][2016-06-05 21:12:08,278][DICLOG]init user userLibrary ok path is : E:\workspace\FilterUtility\Filter\library\default.dic
+[INFO][2016-06-05 21:12:08,278][DICLOG]init ambiguityLibrary ok!
+[INFO][2016-06-05 21:12:10,447][DICLOG]init core library ok use time :2154
+[INFO][2016-06-05 21:12:11,781][DICLOG]init ngram ok use time :1334

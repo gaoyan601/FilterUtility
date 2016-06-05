@@ -290,13 +290,11 @@ public class Time
 				month = "0"+month;
 		} catch(Exception e)
 		{
-			System.out.println("请输入正确格式");
-			System.exit(0);
+			return date;
 		}
 		if(setDate[2].length()!=4 || month.length()!=2 && day.length()!=2)
 		{
-			System.out.println("请输入正确格式");
-			System.exit(0);
+			return date;
 		}
 		
 		return setDate[2]+"/"+month+"/"+day+" "+setDate[3]+":"+setDate[4]+":"+setDate[5];
@@ -359,13 +357,11 @@ public class Time
 			}
 		} catch(Exception e)
 		{
-			System.out.println("请输入正确格式");
-			System.exit(0);
+			return date;
 		}
 		if(setDate[0].length()!=4 || setDate[1].length()!=2 && setDate[2].length()!=2)
 		{
-			System.out.println("请输入正确格式");
-			System.exit(0);
+			return date;
 		}
 		
 		return setDate[0]+"/"+setDate[1]+"/"+setDate[2]+" "+setDate[3]+":"+setDate[4]+":"+setDate[5];
