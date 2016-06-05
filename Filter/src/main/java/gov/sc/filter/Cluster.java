@@ -192,7 +192,6 @@ public class Cluster {
 			return;
 		}
 		result_set_all = new ArrayList<List<String[]>>();
-		int rowLength = cells.get(0).length;
 		for (List<Integer> set : result_int) {
 			List<String[]> list_result_set = new ArrayList<String[]>();
 			for (int i : set) {
@@ -204,7 +203,6 @@ public class Cluster {
 					return o1[tarLine].compareTo(o2[tarLine]);
 				}
 			});
-			list_result_set.add(new String[rowLength]);
 			result_set_all.add(list_result_set);
 		}
 	}
@@ -213,11 +211,16 @@ public class Cluster {
 		if (result_set_all == null)
 			return;
 		result_all = new ArrayList<String[]>();
-		result_all.add(cells.get(0));
+		result_all.add(cells.get(0)); // 添加源数据的第一行（列名）
+		int rowLength = cells.get(0).length;
 		for (List<String[]> list : result_set_all) {
 			for (String[] row : list) {
 				result_all.add(row);
 			}
+			/**
+			 * 新加一行空行，以区分类间的区别
+			 */
+			result_all.add(new String[rowLength]);
 		}
 	}
 
@@ -266,6 +269,10 @@ public class Cluster {
 			process_all();
 		}
 		result_original = new ArrayList<String[]>();
+
+		/**
+		 * 添加第一行（列名），并在最开始插入"总计"列
+		 */
 		String[] firstRow = cells.get(0);
 		String[] newFirstRow = new String[firstRow.length + 1];
 		newFirstRow[0] = "总计";
@@ -273,6 +280,7 @@ public class Cluster {
 			newFirstRow[i + 1] = firstRow[i];
 		}
 		result_original.add(newFirstRow);
+
 		for (List<Integer> set : result_int) {
 			int originalIndex = -1;
 			String originalTime = Time.convert("9000-01-01");
@@ -285,6 +293,9 @@ public class Cluster {
 					originalIndex = i;
 					originalTime = time;
 				}
+			}
+			if (originalIndex == -1) {
+				originalIndex = set.get(0);
 			}
 			String[] row = cells.get(originalIndex);
 			String[] newRow = new String[row.length + 1];
