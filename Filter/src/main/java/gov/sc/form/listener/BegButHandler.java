@@ -90,7 +90,7 @@ public class BegButHandler implements ActionListener {
 			DropDragSupportTextField read = new DropDragSupportTextField(form);
 			begBut.setEnabled(false);
 			scanBut.setEnabled(false);
-			cells = read.getElement();
+			cells = read.getCell();
 			int value = cells.size();
 			proBar.setString("文件解析中...");
 			Cluster cluster;
@@ -114,13 +114,8 @@ public class BegButHandler implements ActionListener {
 			write.setFile(reFile.replace(".xls",
 					"(过滤后所有数据" + selectTarCol.getSelectedItem() + "+"
 							+ selectTarTim.getSelectedItem() + ").xls"));
-			List<String[]> allCell = new ArrayList<String[]>();
-			allCell.add(read.getFirst());
-			for(int i =1;i<reList.size();i++){
-				allCell.add(reList.get(i));
-			}
 			try {
-				write.write(allCell);
+				write.write(reList);
 				proBar.setValue(value * 3);
 			} catch (Exception e1) {
 				e1.printStackTrace();

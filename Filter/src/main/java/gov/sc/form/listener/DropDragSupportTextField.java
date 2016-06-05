@@ -48,26 +48,6 @@ public class DropDragSupportTextField extends JTextField implements
 		return cell;
 	}
 	//得到第一行数据
-	public String[] getFirst(){
-		List<String[]> getAllCell = new ArrayList<String[]>();
-		String[] firElem;
-		getAllCell = getCell();
-		firElem = getAllCell.get(0);
-		return firElem;
-	}
-	//得到除了第一行的数据
-	public List<String[]> getElement(){
-		List<String[]> getAllCell = new ArrayList<String[]>();
-		List<String[]> getCell = new ArrayList<String[]>();
-		String[] elements;
-		getAllCell = getCell();
-		for(int i=1;i<getAllCell.size();i++){
-			elements = getAllCell.get(i);
-			getCell.add(elements);
-		}
-		
-		return getCell;
-	}
 	public void addItem() {
 		JComboBox selectTarCol = new JComboBox();
 		selectTarCol = gui.selectTarCol;
