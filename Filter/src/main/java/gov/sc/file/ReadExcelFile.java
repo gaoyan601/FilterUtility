@@ -30,9 +30,12 @@ public class ReadExcelFile {
 		this.file = file;
 	}
 
-	public static ReadExcelFile getInstance(String file) {
+	public static ReadExcelFile getInstance(String file) throws FileNotFoundException, IOException {
 		if (ref == null) {
 			ref = new ReadExcelFile(file);
+		}else if(ref.file!=file){
+			ref.file=file;
+			ref.readCells();
 		}
 		return ref;
 	}
