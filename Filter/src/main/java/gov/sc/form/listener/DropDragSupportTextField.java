@@ -47,7 +47,7 @@ public class DropDragSupportTextField extends JTextField implements
 		}
 		return cell;
 	}
-	//得到第一行数据
+
 	public void addItem() {
 		JComboBox selectTarCol = new JComboBox();
 		selectTarCol = gui.selectTarCol;
