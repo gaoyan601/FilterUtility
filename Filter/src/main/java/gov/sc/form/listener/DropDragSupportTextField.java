@@ -89,10 +89,21 @@ public class DropDragSupportTextField extends JTextField implements
 			if (dtde.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
 				dtde.acceptDrop(dtde.getDropAction());
 				@SuppressWarnings("unchecked")
-				List<File> s = (List<File>) tr.getTransferData(DataFlavor.javaFileListFlavor);
-				form.srcPthTxtFiled.setText(s.get(s.size()-1).getAbsolutePath()); // 在放置目标上显示从拖拽源传递来的文本信息
-				dtde.dropComplete(true);
-				addItem();
+				List<File> s = (List<File>) tr.getTransferData(DataFlavor.javaFileListFlavor);			
+				String addr = s.get(s.size()-1).getAbsolutePath();			
+				if(addr.endsWith(".xls") || addr.endsWith(".xlsx"))
+				{
+					 // 在放置目标上显示从拖拽源传递来的文本信息
+					form.srcPthTxtFiled.setText(addr);
+					dtde.dropComplete(true);
+					addItem();
+					
+				} else {
+					form.progressbar.setString("请选择excel文件格式...");
+				}
+				
+				
+				
 			} else {
 				dtde.rejectDrop();
 			}
@@ -102,5 +113,4 @@ public class DropDragSupportTextField extends JTextField implements
 		}
 
 	}
-
 }
