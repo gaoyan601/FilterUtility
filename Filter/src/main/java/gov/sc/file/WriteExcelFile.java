@@ -17,21 +17,21 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Kevin
  *
  */
-public class WriteFile{
+public class WriteExcelFile{
 
 	private String file;
 
 	/**
 	 * @param file
 	 */
-	public WriteFile(String file) {
+	public WriteExcelFile(String file) {
 		this.file = file;
 	}
 
 	/**
 	 * 
 	 */
-	public WriteFile() {
+	public WriteExcelFile() {
 		// TODO Auto-generated constructor stub
 	}
 

@@ -94,7 +94,6 @@ public class MainForm {
 		jFrame.setBounds(new Rectangle(320, 290, 540, 200));
 		jFrame.setResizable(false);// 大小不变
 		jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
 	}
 
 	public void setListener() {

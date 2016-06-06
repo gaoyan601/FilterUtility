@@ -17,16 +17,27 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Kevin
  *
  */
-public class ReadFile {
+public class ReadExcelFile {
 
 	private String file;
 	private List<String[]> cells;
+	private static ReadExcelFile ref = null;
 
 	/**
 	 * @param file
 	 */
-	public ReadFile(String file) {
+	public ReadExcelFile(String file) {
 		this.file = file;
+	}
+
+	public static ReadExcelFile getInstance(String file) throws FileNotFoundException, IOException {
+		if (ref == null) {
+			ref = new ReadExcelFile(file);
+		}else if(ref.file!=file){
+			ref.file=file;
+			ref.readCells();
+		}
+		return ref;
 	}
 
 	/**
