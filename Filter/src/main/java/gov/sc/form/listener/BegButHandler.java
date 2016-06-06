@@ -97,19 +97,19 @@ public class BegButHandler implements ActionListener {
 				return;
 			}
 			searchTime = cells.get(0);
-			for(int i =0;i<searchTime.length;i++){
-				if(searchTime[i].matches(".*时间.*")||searchTime[i].matches(".*日期.*")){
+			for (int i = 0; i < searchTime.length; i++) {
+				if (searchTime[i].matches(".*时间.*")
+						|| searchTime[i].matches(".*日期.*")) {
 					timeIndex = i;
 				}
-				if(searchTime[i].matches("标题")){
+				if (searchTime[i].matches("标题")) {
 					tarIndex = i;
 				}
 			}
-			
 			int value = cells.size();
 			proBar.setString("文件解析中...");
-			tarline = selectTarCol.getSelectedIndex()+tarIndex;
-			timeline = selectTarTim.getSelectedIndex()+timeIndex;
+			tarline = selectTarCol.getSelectedIndex() + tarIndex;
+			timeline = selectTarTim.getSelectedIndex() + timeIndex;
 			Cluster cluster = new Cluster(cells, tarline, timeline);
 			List<String[]> reList = cluster.getResult_all();
 			proBar.setValue(value * 2);

@@ -52,6 +52,12 @@ public class DropDragSupportTextField extends JTextField implements
 		proBar.setString("文件读取成功");
 		String[] list = cells.get(0);
 		// 判断标题
+		for (int i = 0; i < list.length; i++) {
+			if (list[i].matches("标题")) {
+			 // 就把标题换到第一行。
+			
+			}
+		}
 		if (list[0].matches("标题")) {
 			for (int i = 0; i < list.length; i++) {
 				if (list[i].length() >= 5) {
@@ -76,7 +82,7 @@ public class DropDragSupportTextField extends JTextField implements
 				}
 			}
 		}
-		//时间
+		// 时间
 		if (list[0].matches(".*时间.*") || list[0].matches(".*日期.*")) {
 			for (int i = 0; i < list.length; i++) {
 				if (list[i].length() >= 5) {
