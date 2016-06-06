@@ -47,103 +47,59 @@ public class DropDragSupportTextField extends JTextField implements
 		selectTarTim.removeAllItems();
 		List<String[]> cells = ReadExcelFile.getInstance(
 				form.srcPthTxtFiled.getText()).getCells();
-		proBar.setMaximum(cells.size() * 4);
+		proBar.setMaximum(cells.size() * 3);
 		proBar.setValue(cells.size());
-		proBar.setString("文件读取成功");
-		String[] list = cells.get(0);
-		// 判断标题
-		if (list[0].matches("标题")) {
-			for (int i = 0; i < list.length; i++) {
-				if (list[i].length() >= 5) {
-					selectTarCol.addItem(list[i].substring(0, 4) + "...");
-				} else {
-					selectTarCol.addItem(list[i]);
-				}
+		String[] items = cells.get(0);
+		for (int i = 0; i < items.length; i++) {
+			selectTarCol.addItem(items[i]);
+			selectTarTim.addItem(items[i]);
+			if (items[i].matches("标题")) {
+				selectTarCol.setSelectedIndex(i);
+				continue;
 			}
-		} else {
-			for (int i = 0; i < list.length; i++) {
-				if (list[i].matches("标题")) {
-					String element = list[i];
-					list[i] = list[0];
-					list[0] = element;
-				}
-			}
-			for (int i = 0; i < list.length; i++) {
-				if (list[i].length() >= 5) {
-					selectTarCol.addItem(list[i].substring(0, 4) + "...");
-				} else {
-					selectTarCol.addItem(list[i]);
-				}
+			if (items[i].matches(".*时间|.*日期")) {
+				selectTarTim.setSelectedIndex(i);
 			}
 		}
-		//时间
-		if (list[0].matches(".*时间.*") || list[0].matches(".*日期.*")) {
-			for (int i = 0; i < list.length; i++) {
-				if (list[i].length() >= 5) {
-					selectTarTim.addItem(list[i].substring(0, 4) + "...");
-				} else {
-					selectTarTim.addItem(list[i]);
-				}
-			}
-		} else {
-			for (int i = 0; i < list.length; i++) {
-				if (list[i].matches(".*时间.*") || list[i].matches(".*日期.*")) {
-					String element = list[i];
-					list[i] = list[0];
-					list[0] = element;
-				}
-			}
-			for (int i = 0; i < list.length; i++) {
-				if (list[i].length() >= 5) {
-					selectTarTim.addItem(list[i].substring(0, 4) + "...");
-				} else {
-					selectTarTim.addItem(list[i]);
-				}
-
-			}
-			// 问题是 获取时间了 时间这一列别放入到了第一条， 选择时间列的索引的时候时间列为 0；
-		}
+		proBar.setString("initialization succeed!");
 	}
 
 	public void dragEnter(DropTargetDragEvent dtde) {
-		// TODO Auto-generated method stub
-		DataFlavor[] dataFlavors = dtde.getCurrentDataFlavors();
-		if (dataFlavors[0].match(DataFlavor.javaFileListFlavor)) {
-			
-			try {
-				Transferable tr = dtde.getTransferable();
-				Object obj = tr.getTransferData(DataFlavor.javaFileListFlavor);
-				@SuppressWarnings("unchecked")
-				List<File> files = (List<File>) obj;
-				String fileName = files.get(files.size() - 1).getAbsolutePath();
-				
-				if (fileName.endsWith(".xls") || fileName.endsWith(".xlsx")) {
-					form.srcPthTxtFiled.setText(fileName);
-					addItem();
-				}
-			} catch (Exception e) {
-				logger.info("init file error--->" + e.toString());
-			}
-		}
+
 	}
 
 	public void dragOver(DropTargetDragEvent dtde) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public void dropActionChanged(DropTargetDragEvent dtde) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public void dragExit(DropTargetEvent dte) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public void drop(DropTargetDropEvent dtde) {
-		// TODO Auto-generated method stub
+		JProgressBar proBar = form.progressbar;
+		proBar.setString("initializing.....");
+		try {
+			Transferable tr = dtde.getTransferable(); // 得到传递来的数据对象
+			// 处理数据对象，得到其中的文本信息
+			if (dtde.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
+				dtde.acceptDrop(dtde.getDropAction());
+				@SuppressWarnings("unchecked")
+				List<File> s = (List<File>) tr.getTransferData(DataFlavor.javaFileListFlavor);
+				form.srcPthTxtFiled.setText(s.get(s.size()-1).getAbsolutePath()); // 在放置目标上显示从拖拽源传递来的文本信息
+				dtde.dropComplete(true);
+				addItem();
+			} else {
+				dtde.rejectDrop();
+			}
+		} catch (Exception err) {
+			form.progressbar.setString("initialization failed.....");
+			logger.info("initialization failed!" + err.toString());
+		}
 
 	}
 
