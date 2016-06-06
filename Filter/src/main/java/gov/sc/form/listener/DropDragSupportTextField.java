@@ -51,14 +51,57 @@ public class DropDragSupportTextField extends JTextField implements
 		proBar.setValue(cells.size());
 		proBar.setString("文件读取成功");
 		String[] list = cells.get(0);
-		for (String element : list) {
-			if (element.length() >= 5) {
-				selectTarCol.addItem((String) element.substring(0, 4) + "...");
-				selectTarTim.addItem((String) element.substring(0, 4) + "...");
-			} else {
-				selectTarCol.addItem(element);
-				selectTarTim.addItem(element);
+		// 判断标题
+		if (list[0].matches("标题")) {
+			for (int i = 0; i < list.length; i++) {
+				if (list[i].length() >= 5) {
+					selectTarCol.addItem(list[i].substring(0, 4) + "...");
+				} else {
+					selectTarCol.addItem(list[i]);
+				}
 			}
+		} else {
+			for (int i = 0; i < list.length; i++) {
+				if (list[i].matches("标题")) {
+					String element = list[i];
+					list[i] = list[0];
+					list[0] = element;
+				}
+			}
+			for (int i = 0; i < list.length; i++) {
+				if (list[i].length() >= 5) {
+					selectTarCol.addItem(list[i].substring(0, 4) + "...");
+				} else {
+					selectTarCol.addItem(list[i]);
+				}
+			}
+		}
+		//时间
+		if (list[0].matches(".*时间.*") || list[0].matches(".*日期.*")) {
+			for (int i = 0; i < list.length; i++) {
+				if (list[i].length() >= 5) {
+					selectTarTim.addItem(list[i].substring(0, 4) + "...");
+				} else {
+					selectTarTim.addItem(list[i]);
+				}
+			}
+		} else {
+			for (int i = 0; i < list.length; i++) {
+				if (list[i].matches(".*时间.*") || list[i].matches(".*日期.*")) {
+					String element = list[i];
+					list[i] = list[0];
+					list[0] = element;
+				}
+			}
+			for (int i = 0; i < list.length; i++) {
+				if (list[i].length() >= 5) {
+					selectTarTim.addItem(list[i].substring(0, 4) + "...");
+				} else {
+					selectTarTim.addItem(list[i]);
+				}
+
+			}
+			// 问题是 获取时间了 时间这一列别放入到了第一条， 选择时间列的索引的时候时间列为 0；
 		}
 	}
 
