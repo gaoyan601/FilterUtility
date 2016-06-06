@@ -48,6 +48,9 @@ public class BegButHandler implements ActionListener {
 		private List<String[]> cells;
 		private int tarline;
 		private int timeline;
+		private String[] searchTime;
+		private int timeIndex = 0;
+		private int tarIndex = 0;
 
 		public HandleThread(MainForm form) {
 			this.proBar = form.progressbar;
@@ -93,10 +96,20 @@ public class BegButHandler implements ActionListener {
 				logger.info("read Excel file error---->" + e.toString());
 				return;
 			}
+			searchTime = cells.get(0);
+			for(int i =0;i<searchTime.length;i++){
+				if(searchTime[i].matches(".*时间.*")||searchTime[i].matches(".*日期.*")){
+					timeIndex = i;
+				}
+				if(searchTime[i].matches("标题")){
+					tarIndex = i;
+				}
+			}
+			
 			int value = cells.size();
 			proBar.setString("文件解析中...");
-			tarline = selectTarCol.getSelectedIndex();
-			timeline = selectTarTim.getSelectedIndex();
+			tarline = selectTarCol.getSelectedIndex()+tarIndex;
+			timeline = selectTarTim.getSelectedIndex()+timeIndex;
 			Cluster cluster = new Cluster(cells, tarline, timeline);
 			List<String[]> reList = cluster.getResult_all();
 			proBar.setValue(value * 2);
