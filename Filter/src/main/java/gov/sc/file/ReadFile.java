@@ -15,7 +15,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * 该类继承自File类
  * 
  * @author Kevin
- * 
+ *
  */
 public class ReadFile {
 
@@ -45,8 +45,9 @@ public class ReadFile {
 	 * 
 	 * @return 返回得到的list
 	 * @throws IOException
+	 * @throws FileNotFoundException
 	 */
-	public void readCells() throws IOException {
+	public void readCells() throws FileNotFoundException, IOException {
 		cells = new ArrayList<String[]>();
 		Workbook workbook;
 		if (file.endsWith(".xls")) {
