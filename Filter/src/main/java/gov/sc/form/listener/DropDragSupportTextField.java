@@ -66,14 +66,16 @@ public class DropDragSupportTextField extends JTextField implements
 		// TODO Auto-generated method stub
 		DataFlavor[] dataFlavors = dtde.getCurrentDataFlavors();
 		if (dataFlavors[0].match(DataFlavor.javaFileListFlavor)) {
+			
 			try {
 				Transferable tr = dtde.getTransferable();
 				Object obj = tr.getTransferData(DataFlavor.javaFileListFlavor);
 				@SuppressWarnings("unchecked")
 				List<File> files = (List<File>) obj;
 				String fileName = files.get(files.size() - 1).getAbsolutePath();
-				form.srcPthTxtFiled.setText(fileName);
-				if (fileName.matches(".*xls") || fileName.matches(".*xlsx")) {
+				
+				if (fileName.endsWith(".xls") || fileName.endsWith(".xlsx")) {
+					form.srcPthTxtFiled.setText(fileName);
 					addItem();
 				}
 			} catch (Exception e) {
