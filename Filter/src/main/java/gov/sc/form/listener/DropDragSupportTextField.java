@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import gov.sc.file.ReadExcelFile;
 import gov.sc.form.MainForm;
 
+import java.awt.EventQueue;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DnDConstants;
@@ -30,78 +31,114 @@ public class DropDragSupportTextField extends JTextField implements
 	 */
 	private static final Logger logger = Logger
 			.getLogger(DropDragSupportTextField.class);
-
 	private MainForm form;
-
+	private DropThread dropThread = null;
+	
 	public DropDragSupportTextField(MainForm form) {
 		this.form = form;
 		new DropTarget(form.jFrame, DnDConstants.ACTION_COPY_OR_MOVE, this,
 				true);
 	}
-
+	
 	private void addItem() throws FileNotFoundException, IOException {
 		JComboBox<String> selectTarCol = form.selectTarCol;
 		JComboBox<String> selectTarTim = form.selectTarTim;
 		JProgressBar proBar = form.progressbar;
-		selectTarCol.removeAllItems();
-		selectTarTim.removeAllItems();
 		List<String[]> cells = ReadExcelFile.getInstance(
 				form.srcPthTxtFiled.getText()).getCells();
-		proBar.setMaximum(cells.size() * 4);
-		proBar.setValue(cells.size());
-		proBar.setString("文件读取成功");
-		String[] list = cells.get(0);
-		for (String element : list) {
-			if (element.length() >= 5) {
-				selectTarCol.addItem((String) element.substring(0, 4) + "...");
-				selectTarTim.addItem((String) element.substring(0, 4) + "...");
-			} else {
-				selectTarCol.addItem(element);
-				selectTarTim.addItem(element);
+		selectTarCol.removeAllItems();
+		selectTarTim.removeAllItems();
+		proBar.setMaximum(cells.size() * 3);
+		String[] items = cells.get(0);
+		for (int i = 0; i < items.length; i++) {
+			selectTarCol.addItem(items[i]);
+			selectTarTim.addItem(items[i]);
+			if (items[i].matches("标题")) {
+				selectTarCol.setSelectedIndex(i);
+				continue;
+			}
+			if (items[i].matches(".*时间|.*日期")) {
+				selectTarTim.setSelectedIndex(i);
 			}
 		}
+		proBar.setString("initialization succeed!");
+		form.begBut.setEnabled(true);
+
+		dropThread = null;
 	}
 
 	public void dragEnter(DropTargetDragEvent dtde) {
-		// TODO Auto-generated method stub
-		DataFlavor[] dataFlavors = dtde.getCurrentDataFlavors();
-		if (dataFlavors[0].match(DataFlavor.javaFileListFlavor)) {
-			
-			try {
-				Transferable tr = dtde.getTransferable();
-				Object obj = tr.getTransferData(DataFlavor.javaFileListFlavor);
-				@SuppressWarnings("unchecked")
-				List<File> files = (List<File>) obj;
-				String fileName = files.get(files.size() - 1).getAbsolutePath();
-				
-				if (fileName.endsWith(".xls") || fileName.endsWith(".xlsx")) {
-					form.srcPthTxtFiled.setText(fileName);
-					addItem();
-				}
-			} catch (Exception e) {
-				logger.info("init file error--->" + e.toString());
-			}
-		}
+
 	}
 
 	public void dragOver(DropTargetDragEvent dtde) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public void dropActionChanged(DropTargetDragEvent dtde) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public void dragExit(DropTargetEvent dte) {
 		// TODO Auto-generated method stub
-
 	}
 
-	public void drop(DropTargetDropEvent dtde) {
-		// TODO Auto-generated method stub
+	@SuppressWarnings("deprecation")
+	public void drop(final DropTargetDropEvent dtde) {
+		
+		//判断是否存在已经存在的拖入线程，如果存在停止该线程。
+		if(dropThread != null)
+			dropThread.stop();
+		
+		JProgressBar proBar = form.progressbar;
+		form.begBut.setEnabled(false);
+		proBar.setString("initializing.....");
+		try {
+			Transferable tr = dtde.getTransferable(); // 得到传递来的数据对象
+			// 处理数据对象，得到其中的文本信息
+			if (dtde.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
+				dtde.acceptDrop(dtde.getDropAction());
+				@SuppressWarnings("unchecked")
+				List<File> s = (List<File>) tr.getTransferData(DataFlavor.javaFileListFlavor);			
+				String addr = s.get(s.size()-1).getAbsolutePath();			
+				if(addr.endsWith(".xls") || addr.endsWith(".xlsx"))
+				{
+					 // 在放置目标上显示从拖拽源传递来的文本信息
+					form.srcPthTxtFiled.setText(addr);
+					dtde.dropComplete(true);
+					dropThread = new DropThread();
+					dropThread.start();
+				} else {
+					form.progressbar.setString("请选择excel文件格式...");
+				}
 
+			} else {
+				dtde.rejectDrop();
+			}
+		} catch (Exception err) {
+			err.printStackTrace();
+			form.progressbar.setString("initialization failed.....");
+			logger.info("initialization failed!" + err.toString());
+		}
 	}
-
+	
+	public class DropThread extends Thread
+	{
+		@Override
+		public void run()
+		{
+			try
+			{
+				addItem();
+			} catch (FileNotFoundException e)
+			{
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			} catch (IOException e)
+			{
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
+		}
+	}
 }

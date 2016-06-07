@@ -34,7 +34,7 @@ public class ConfForm {
 		jFrame.setLocation(400, 200);
 		jFrame.setVisible(true);
 		jFrame.requestFocus();
-		ImageIcon icon = new ImageIcon("./src/main/resources/image/filter.jpg");
+		ImageIcon icon = new ImageIcon("images/filter.jpg");
 		jFrame.setIconImage(icon.getImage());
 		jTextArea.setTabSize(4);
 		jTextArea.setFont(new Font("宋体", Font.BOLD, 13));
