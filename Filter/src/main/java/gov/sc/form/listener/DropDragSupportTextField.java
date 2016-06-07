@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 
@@ -33,6 +34,8 @@ public class DropDragSupportTextField extends JTextField implements
 			.getLogger(DropDragSupportTextField.class);
 	private MainForm form;
 	private DropThread dropThread = null;
+	//判断是否正在解析。
+	public static boolean begPress = false;
 	
 	public DropDragSupportTextField(MainForm form) {
 		this.form = form;
@@ -87,6 +90,11 @@ public class DropDragSupportTextField extends JTextField implements
 	public void drop(final DropTargetDropEvent dtde) {
 		
 		//判断是否存在已经存在的拖入线程，如果存在停止该线程。
+		if(begPress)
+		{
+			JOptionPane.showMessageDialog(form.jFrame, "正在解析，请稍后...");
+			return;
+		}
 		if(dropThread != null)
 			dropThread.stop();
 		

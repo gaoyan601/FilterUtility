@@ -29,6 +29,9 @@ public class BegButHandler implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		
+		DropDragSupportTextField.begPress = true;
+		
 		String reFile = form.srcPthTxtFiled.getText().trim();
 		if (reFile == null || reFile.equals("")) {
 			JOptionPane.showMessageDialog(null, "请选择Excel文件");
@@ -142,6 +145,7 @@ public class BegButHandler implements ActionListener {
 			begBut.setEnabled(true);
 			scanBut.setEnabled(true);
 			proBar.setValue(0);
+			DropDragSupportTextField.begPress = false;
 		}
 	}
 
