@@ -95,19 +95,16 @@ public class BegButHandler implements ActionListener {
 				return;
 			}
 			
-			int value = cells.size();
 			proBar.setString("文件解析中...");
 			int tarline = selectTarCol.getSelectedIndex();
 			int timeline = selectTarTim.getSelectedIndex();
 			Cluster cluster = new Cluster(cells, tarline, timeline);
-			List<String[]> reList = cluster.getResult_all();
-			proBar.setValue(value * 2);
+			List<String[]> reList = cluster.getResult_all(proBar);
 			WriteExcelFile write = new WriteExcelFile(reFile.replace(".xls",
 					"(过滤后所有数据" + selectTarCol.getSelectedItem() + "+"
 							+ selectTarTim.getSelectedItem() + ").xls"));
 			try {
-				write.write(reList);
-				proBar.setValue(value * 3);
+				write.write(reList,proBar);
 			} catch (Exception e) {
 				logger.info("write all result file error--->" + e.toString());
 				showErrorMessage();
@@ -117,9 +114,8 @@ public class BegButHandler implements ActionListener {
 				write.setFile(reFile.replace(".xls",
 						"(过滤后统计数据" + selectTarCol.getSelectedItem() + "+"
 								+ selectTarTim.getSelectedItem() + ").xls"));
-				reList = cluster.getResult_original();// 统计结果
-				write.write(reList);
-				proBar.setValue(value * 4);
+				reList = cluster.getResult_original(proBar);// 统计结果
+				write.write(reList,proBar);
 			} catch (Exception e) {
 				logger.info("write statistics result file error--->"
 						+ e.toString());

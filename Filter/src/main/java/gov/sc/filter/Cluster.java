@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JProgressBar;
+
 /**
  * 该类是用于对数据进行聚类，聚类的完整过程包括：对目标数据进行分词、对分词结果进行聚类；在实现过程中为了减少内存的消耗，在聚类过程中
  * 用数据的index代替该条数据，则可以不用保存所有的数据；但需要在聚类实现后，将结果中的index替换为完整的数据；并对每个簇中的数据以
@@ -62,13 +64,17 @@ public class Cluster {
 	 * @return void
 	 * @throws
 	 */
-	private void getSegmentList() {
+	private void getSegmentList(JProgressBar proBar) {
 		if (cells == null || tarLine < 0 || cells.size() == 0) {
 			throw new IllegalArgumentException("原始的list和目标列数据不合法");
 		}
+		int proBarValue = proBar.getValue();
 		list_seg = new ArrayList<String[]>();
+		int i = 0;
 		for (String[] row : cells) {
+			i++;
 			list_seg.add(analysis.parse(row[tarLine]));
+			proBar.setValue(proBarValue + i);
 		}
 	}
 
@@ -80,10 +86,11 @@ public class Cluster {
 	 * @return void
 	 * @throws
 	 */
-	private void cluster() {
+	private void cluster(JProgressBar proBar) {
 		if (list_seg == null || list_seg.size() == 0) {
 			throw new IllegalArgumentException("分词列表是空的");
 		}
+		int proBarValue = proBar.getValue();
 		result_int = new ArrayList<List<Integer>>();
 		for (int i = 1; i < list_seg.size(); i++) {
 			int max_sim_set_index = -1;
@@ -108,6 +115,7 @@ public class Cluster {
 			} else {
 				result_int.get(max_sim_set_index).add(i);
 			}
+			proBar.setValue(proBarValue + i);
 		}
 		Collections.sort(result_int, new Comparator<List<Integer>>() {
 			public int compare(List<Integer> o1, List<Integer> o2) {
@@ -233,9 +241,11 @@ public class Cluster {
 	 * @return void
 	 * @throws
 	 */
-	private void process_all() {
-		getSegmentList();
-		cluster();
+	private void process_all(JProgressBar proBar) {
+		proBar.setMaximum(cells.size() * 3);
+		getSegmentList(proBar);
+		cluster(proBar);
+		proBar.setMaximum(proBar.getMaximum()+result_int.size());
 		changeIntSetToStringSet();
 		changeSetToCells();
 	}
@@ -249,9 +259,9 @@ public class Cluster {
 	 * @return List<List<String[]>>
 	 * @throws
 	 */
-	public List<String[]> getResult_all() {
+	public List<String[]> getResult_all(JProgressBar proBar) {
 		if (result_all == null) {
-			process_all();
+			process_all(proBar);
 		}
 		return result_all;
 	}
@@ -265,14 +275,15 @@ public class Cluster {
 	 * @return void
 	 * @throws
 	 */
-	private void process_original() {
+	private void process_original(JProgressBar proBar) {
 		if (result_int == null) {
-			process_all();
+			process_all(proBar);
 		}
 		result_original = new ArrayList<String[]>();
 		/**
 		 * 添加第一行（列名），并在最开始插入"总计"列
 		 */
+		int proBarValue = proBar.getValue();
 		String[] firstRow = cells.get(0);
 		String[] newFirstRow = new String[firstRow.length + 1];
 		newFirstRow[0] = "总计";
@@ -280,7 +291,7 @@ public class Cluster {
 			newFirstRow[i + 1] = firstRow[i];
 		}
 		result_original.add(newFirstRow);
-
+		int count = 0;
 		for (List<Integer> set : result_int) {
 			if (set.size() == 1) {
 				continue;
@@ -301,6 +312,7 @@ public class Cluster {
 				} else {
 					map.put(content, 1);
 				}
+				proBar.setValue(proBarValue + count);
 			}
 			if (originalIndex == -1) {
 				originalIndex = set.get(0);
@@ -335,9 +347,9 @@ public class Cluster {
 	 * @return List<String[]>
 	 * @throws
 	 */
-	public List<String[]> getResult_original() {
+	public List<String[]> getResult_original(JProgressBar proBar) {
 		if (result_original == null) {
-			process_original();
+			process_original(proBar);
 		}
 		return result_original;
 	}
