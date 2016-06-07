@@ -20,12 +20,12 @@ public class Filter {
 		ReadExcelFile rf = new ReadExcelFile(file);
 		List<String[]> cells = rf.getCells();
 		Cluster cluster = new Cluster(cells, 2, 3);
-		List<String[]> result = cluster.getResult_all();
+		/*List<String[]> result = cluster.getResult_all();
 		logger.info("总共有" + result.size() + "个类");
 
 		for (String[] row : result) {
 			logger.info(row[2]);
 		}
-		logger.info("");
+		logger.info("");*/
 	}
 }

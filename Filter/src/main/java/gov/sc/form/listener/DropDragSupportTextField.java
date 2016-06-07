@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import gov.sc.file.ReadExcelFile;
 import gov.sc.form.MainForm;
 
-import java.awt.EventQueue;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DnDConstants;
@@ -51,7 +50,6 @@ public class DropDragSupportTextField extends JTextField implements
 				form.srcPthTxtFiled.getText()).getCells();
 		selectTarCol.removeAllItems();
 		selectTarTim.removeAllItems();
-		proBar.setMaximum(cells.size() * 3);
 		String[] items = cells.get(0);
 		for (int i = 0; i < items.length; i++) {
 			selectTarCol.addItem(items[i]);
@@ -66,7 +64,6 @@ public class DropDragSupportTextField extends JTextField implements
 		}
 		proBar.setString("initialization succeed!");
 		form.begBut.setEnabled(true);
-
 		dropThread = null;
 	}
 
