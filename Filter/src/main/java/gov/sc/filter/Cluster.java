@@ -6,7 +6,9 @@ import gov.sc.utils.Time;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 该类是用于对数据进行聚类，聚类的完整过程包括：对目标数据进行分词、对分词结果进行聚类；在实现过程中为了减少内存的消耗，在聚类过程中
@@ -190,7 +192,7 @@ public class Cluster {
 			return;
 		}
 		result_set_all = new ArrayList<List<String[]>>();
-		
+
 		for (List<Integer> set : result_int) {
 			List<String[]> list_result_set = new ArrayList<String[]>();
 			for (int i : set) {
@@ -280,22 +282,41 @@ public class Cluster {
 		result_original.add(newFirstRow);
 
 		for (List<Integer> set : result_int) {
-			int originalIndex = -1;
-			String originalTime = Time.convert("9000-01-01");
 			if (set.size() == 1) {
 				continue;
 			}
-			for (int i : set) {
-				String time = Time.convert(cells.get(i)[timeLine]);
+			int originalIndex = -1;
+			String originalTime = Time.convert("9000-01-01");
+			String maxNumContent = "";
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			for (int index : set) {
+				String time = Time.convert(cells.get(index)[timeLine]);
 				if (Time.compare(time, originalTime) < 0) {
-					originalIndex = i;
+					originalIndex = index;
 					originalTime = time;
+				}
+				String content = cells.get(index)[tarLine];
+				if (map.containsKey(content)) {
+					map.put(content, map.get(content) + 1);
+				} else {
+					map.put(content, 1);
 				}
 			}
 			if (originalIndex == -1) {
 				originalIndex = set.get(0);
+				maxNumContent = cells.get(set.get(0))[tarLine];
+			} else {
+				int max = -1;
+				for (String key : map.keySet()) {
+					if (map.get(key) > max) {
+						max = map.get(key);
+						maxNumContent = key;
+					}
+				}
 			}
+
 			String[] row = cells.get(originalIndex);
+			row[tarLine] = maxNumContent;
 			String[] newRow = new String[row.length + 1];
 			for (int i = 0; i < row.length; i++) {
 				newRow[i + 1] = row[i];
