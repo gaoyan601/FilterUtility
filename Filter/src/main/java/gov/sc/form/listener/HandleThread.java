@@ -55,15 +55,15 @@ public class HandleThread extends Thread {
 		File fileAll = new File(reFile.replace(".xls",
 				"(过滤后所有数据" + selectTarCol.getSelectedItem() + "+"
 						+ selectTarTim.getSelectedItem() + ").xls"));
-		File fileSta = new File(reFile.replace(".xls",
+		/*File fileSta = new File(reFile.replace(".xls",
 				"(过滤后统计数据" + selectTarCol.getSelectedItem() + "+"
-						+ selectTarTim.getSelectedItem() + ").xls"));
+						+ selectTarTim.getSelectedItem() + ").xls"));*/
 		if (fileAll.exists()) {
 			int Yes = JOptionPane.showConfirmDialog(null,
 					"文件已经解析过，是否删除已存在的文件，并生成新文件");
 			if (Yes == JOptionPane.YES_OPTION) {
 				fileAll.delete();
-				fileSta.delete();
+				//fileSta.delete();
 			} else {
 				return;
 			}
@@ -99,7 +99,7 @@ public class HandleThread extends Thread {
 				"(过滤后所有数据" + selectTarCol.getSelectedItem() + "+"
 						+ selectTarTim.getSelectedItem() + ").xls"));
 		try {
-			write.write(reList);
+			write.write(reList,0);
 			proBar.setValue(value * 3);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -107,11 +107,11 @@ public class HandleThread extends Thread {
 		}
 
 		try {
-			write.setFile(reFile.replace(".xls",
+			/*write.setFile(reFile.replace(".xls",
 					"(过滤后统计数据" + selectTarCol.getSelectedItem() + "+"
-							+ selectTarTim.getSelectedItem() + ").xls"));
+							+ selectTarTim.getSelectedItem() + ").xls"));*/
 			reList = cluster.getResult_original();// 统计结果
-			write.write(reList);
+			write.write(reList,1);
 			proBar.setValue(value * 4);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -48,7 +48,6 @@ public class DropDragSupportTextField extends JTextField implements
 		List<String[]> cells = ReadExcelFile.getInstance(
 				form.srcPthTxtFiled.getText()).getCells();
 		proBar.setMaximum(cells.size() * 4);
-		proBar.setValue(cells.size());
 		proBar.setString("文件读取成功");
 		String[] list = cells.get(0);
 		// 判断标题
