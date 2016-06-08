@@ -26,6 +26,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class MainForm {
 	public final JFrame jFrame = new JFrame("过滤器");
@@ -47,23 +49,35 @@ public class MainForm {
 
 	public void createForm() {
 
+		JPanel jpanela = new JPanel();
 		JPanel jpanelb = new JPanel();
 		JPanel jpanelc = new JPanel();
+		JPanel jpaneld = new JPanel();
+		JPanel jpanele = new JPanel();
+		JPanel jpanelf = new JPanel();
 		JMenuBar menuBar = new JMenuBar();
 		progressbar.setStringPainted(true);
 		progressbar.setForeground(Color.GREEN);
-		progressbar.setString("等待选择Excel文件。。。");
-		jpanelb.add(selectFile);
-		jpanelb.add(srcPthTxtFiled);
-		jpanelb.add(scanBut);
-		jpanelb.add(selectCol);
-		jpanelb.add(selectTarCol);
-		jpanelb.add(selectTim);
-		jpanelb.add(selectTarTim);
-		jpanelb.add(begBut);
-		jpanelc.add(progressbar);
-		jFrame.add(jpanelb, BorderLayout.CENTER);
+		progressbar.setString("等待选择Excel文件");
+		jpanela.setPreferredSize(new Dimension(150, 60));
+		jpanelb.setPreferredSize(new Dimension(150, 55));
+		jFrame.add(jpanela, BorderLayout.NORTH);
+		jFrame.add(jpanelb, BorderLayout.CENTER);// 三个嵌套
 		jFrame.add(jpanelc, BorderLayout.SOUTH);
+		jpanelb.add(jpaneld, BorderLayout.WEST);
+		jpanelb.add(jpanele, BorderLayout.EAST);
+		jpanelb.add(jpanelf, BorderLayout.SOUTH);
+		jpanela.add(selectFile);
+		jpanela.add(srcPthTxtFiled);
+		jpanela.add(scanBut);
+
+		jpaneld.add(selectCol);
+		jpaneld.add(selectTarCol);
+		jpanele.add(selectTim);
+		jpanele.add(selectTarTim);
+		jpanelf.add(begBut);
+
+		jpanelc.add(progressbar);
 		jFrame.setJMenuBar(menuBar);
 		menuBar.add(fileMenu);
 		menuBar.add(helpMenu);
@@ -71,17 +85,31 @@ public class MainForm {
 		fileMenu.add(confMI);
 		fileMenu.add(exitMI);
 		helpMenu.add(helpMI);
+		jFrame.setTitle("舆情监测器");
 		selectTarCol.setFont(new Font("宋体", Font.BOLD, 15));
 		selectTarTim.setFont(new Font("宋体", Font.BOLD, 15));
 		selectTarCol.addItem("请选择文件");
 		selectTarTim.addItem("请选择文件");
-		progressbar.setPreferredSize(new Dimension(540, 30));// 进度条大小
-		srcPthTxtFiled.setColumns(25);
-		selectFile.setFont(new Font("宋体", Font.BOLD, 18));
-		scanBut.setFont(new Font("宋体", Font.BOLD, 15));
-		selectCol.setFont(new Font("宋体", Font.BOLD, 18));
-		selectTim.setFont(new Font("宋体", Font.BOLD, 18));
-		begBut.setFont(new Font("宋体", Font.BOLD, 15));
+		srcPthTxtFiled.setColumns(44);
+		selectTarCol.setPreferredSize(new Dimension(130, 30));
+		selectTarTim.setPreferredSize(new Dimension(130, 30));
+		selectFile.setFont(new Font("宋体", Font.BOLD, 25));
+		srcPthTxtFiled.setPreferredSize(new Dimension(446, 33));
+		scanBut.setFont(new Font("宋体", Font.BOLD, 25));
+		fileMenu.setFont(new Font("宋体", Font.BOLD, 15));
+		helpMenu.setFont(new Font("宋体", Font.BOLD, 15));
+		progressbar.setPreferredSize(new Dimension(600, 45));
+		progressbar.setFont(new Font("宋体", Font.BOLD, 22));// 进度条大小
+		selectTarCol.setFont(new Font("宋体", Font.BOLD, 20));
+		selectTarTim.setFont(new Font("宋体", Font.BOLD, 20));
+		selectCol.setFont(new Font("宋体", Font.BOLD, 25));
+		selectCol.setLocation(300, 10);
+		selectTim.setFont(new Font("宋体", Font.BOLD, 25));
+		begBut.setFont(new Font("宋体", Font.BOLD, 45));
+		openMI.setFont(new Font("宋体", Font.BOLD, 13));
+		helpMI.setFont(new Font("宋体", Font.BOLD, 13));
+		exitMI.setFont(new Font("宋体", Font.BOLD, 13));
+		confMI.setFont(new Font("宋体", Font.BOLD, 13));
 		openMI.setIcon(new ImageIcon("images/open.jpg"));// xiugai
 		exitMI.setIcon(new ImageIcon("images/exit.jpg"));
 		helpMI.setIcon(new ImageIcon("images/help.jpg"));
@@ -91,7 +119,7 @@ public class MainForm {
 		srcPthTxtFiled.setEditable(false);
 		jFrame.pack();
 		jFrame.setVisible(true);
-		jFrame.setBounds(new Rectangle(320, 290, 540, 200));
+		jFrame.setBounds(new Rectangle(320, 290, 606, 295));
 		jFrame.setResizable(false);// 大小不变
 		jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 	}
@@ -107,6 +135,19 @@ public class MainForm {
 	}
 
 	public static void main(String[] args) {
+		JFrame.setDefaultLookAndFeelDecorated(true);
+		try {
+			UIManager
+					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
 		MainForm ui = new MainForm();
 		ui.createForm();
 		ui.setListener();
