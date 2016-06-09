@@ -200,8 +200,12 @@ public class Cluster {
 			return;
 		}
 		result_set_all = new ArrayList<List<String[]>>();
-
+		List<String[]> singleList = new ArrayList<String[]>();
 		for (List<Integer> set : result_int) {
+			if(set.size()==1){
+				singleList.add(cells.get(set.get(0)));
+				continue;
+			}
 			List<String[]> list_result_set = new ArrayList<String[]>();
 			for (int i : set) {
 				list_result_set.add(cells.get(i));
@@ -214,6 +218,14 @@ public class Cluster {
 			});
 			result_set_all.add(list_result_set);
 		}
+		
+		Collections.sort(singleList, new Comparator<String[]>() {
+
+			public int compare(String[] o1, String[] o2) {
+				return o1[tarLine].compareTo(o2[tarLine]);
+			}
+		});
+		result_set_all.add(singleList);
 	}
 
 	private void changeSetToCells() {
