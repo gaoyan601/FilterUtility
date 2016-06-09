@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
@@ -14,17 +15,19 @@ import javax.swing.filechooser.FileFilter;
 
 public class ScanButHandler implements ActionListener {
 
-	private MainForm gui;
+	private MainForm form;
+	private JFrame jFrame;
 
-	public ScanButHandler(MainForm gui) {
-		this.gui = gui;
+	public ScanButHandler(MainForm form) {
+		this.form = form;
+		this.jFrame = form.jFrame;
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		JTextField srcPthTxtFiled = new JTextField();
-		srcPthTxtFiled = gui.srcPthTxtFiled;
+		srcPthTxtFiled = form.srcPthTxtFiled;
 		JProgressBar proBar = new JProgressBar();
-		proBar = gui.progressbar;
+		proBar = form.progressbar;
 		JFileChooser chooser = new JFileChooser();
 		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		chooser.setFileFilter(new FileFilter() {
@@ -41,7 +44,7 @@ public class ScanButHandler implements ActionListener {
 				return "Excel文件(*.xls/xlsx)";
 			}
 		});
-		if (chooser.showDialog(null, "选择") == JFileChooser.CANCEL_OPTION) {
+		if (chooser.showDialog(jFrame, "选择") == JFileChooser.CANCEL_OPTION) {
 			return;
 		}
 		srcPthTxtFiled.setText(chooser.getSelectedFile().toString());

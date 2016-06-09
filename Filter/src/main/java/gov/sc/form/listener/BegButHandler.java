@@ -1,7 +1,5 @@
 package gov.sc.form.listener;
 
-import org.apache.log4j.Logger;
-
 import gov.sc.file.ReadExcelFile;
 import gov.sc.file.WriteExcelFile;
 import gov.sc.filter.Cluster;
@@ -14,8 +12,11 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
+
+import org.apache.log4j.Logger;
 
 public class BegButHandler implements ActionListener {
 	/**
@@ -23,9 +24,10 @@ public class BegButHandler implements ActionListener {
 	 */
 	private static final Logger logger = Logger.getLogger(BegButHandler.class);
 	private MainForm form;
-
+	private JFrame jFrame;
 	public BegButHandler(MainForm form) {
 		this.form = form;
+		this.jFrame = form.jFrame;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -34,7 +36,7 @@ public class BegButHandler implements ActionListener {
 		
 		String reFile = form.srcPthTxtFiled.getText().trim();
 		if (reFile == null || reFile.equals("")) {
-			JOptionPane.showMessageDialog(null, "请选择Excel文件");
+			JOptionPane.showMessageDialog(jFrame, "请选择Excel文件");
 			return;
 		}
 		HandleThread ht = new HandleThread(form);
@@ -49,7 +51,7 @@ public class BegButHandler implements ActionListener {
 		private JComboBox<String> selectTarTim;
 		private String reFile;
 		private List<String[]> cells;
-
+		private JFrame jFrame;
 		public HandleThread(MainForm form) {
 			this.proBar = form.progressbar;
 			this.begBut = form.begBut;
@@ -57,10 +59,11 @@ public class BegButHandler implements ActionListener {
 			this.selectTarCol = form.selectTarCol;
 			this.selectTarTim = form.selectTarTim;
 			this.reFile = form.srcPthTxtFiled.getText();
+			this.jFrame = form.jFrame;
 		}
 
 		private void showErrorMessage() {
-			JOptionPane.showMessageDialog(null, "文件解析失败");
+			JOptionPane.showMessageDialog(jFrame, "文件解析失败");
 			proBar.setValue(0);
 			proBar.setString("请选择正确目标列和时间列");
 			begBut.setEnabled(true);
@@ -76,7 +79,7 @@ public class BegButHandler implements ActionListener {
 					"(过滤后统计数据" + selectTarCol.getSelectedItem() + "+"
 							+ selectTarTim.getSelectedItem() + ").xls"));
 			if (fileAll.exists()) {
-				int Yes = JOptionPane.showConfirmDialog(null,
+				int Yes = JOptionPane.showConfirmDialog(jFrame,
 						"文件已经解析过，是否删除已存在的文件，并生成新文件");
 				if (Yes == JOptionPane.YES_OPTION) {
 					fileAll.delete();
@@ -122,7 +125,7 @@ public class BegButHandler implements ActionListener {
 				showErrorMessage();
 				return;
 			}
-			JOptionPane.showMessageDialog(null, "解析成功");
+			JOptionPane.showMessageDialog(jFrame, "解析成功");
 			proBar.setString("解析成功！！！");
 			begBut.setEnabled(true);
 			scanBut.setEnabled(true);
