@@ -82,11 +82,11 @@ public class MainForm {
 		selectCol.setFont(new Font("宋体", Font.BOLD, 18));
 		selectTim.setFont(new Font("宋体", Font.BOLD, 18));
 		begBut.setFont(new Font("宋体", Font.BOLD, 15));
-		openMI.setIcon(new ImageIcon("./src/main/resources/image/open.jpg"));// xiugai
-		exitMI.setIcon(new ImageIcon("./src/main/resources/image/exit.jpg"));
-		helpMI.setIcon(new ImageIcon("./src/main/resources/image/help.jpg"));
-		confMI.setIcon(new ImageIcon("./src/main/resources/image/config.png"));
-		ImageIcon icon = new ImageIcon("./src/main/resources/image/filter.jpg");
+		openMI.setIcon(new ImageIcon("images/open.jpg"));// xiugai
+		exitMI.setIcon(new ImageIcon("images/exit.jpg"));
+		helpMI.setIcon(new ImageIcon("images/help.jpg"));
+		confMI.setIcon(new ImageIcon("images/config.png"));
+		ImageIcon icon = new ImageIcon("images/filter.jpg");
 		jFrame.setIconImage(icon.getImage());
 		srcPthTxtFiled.setEditable(false);
 		jFrame.pack();
@@ -94,7 +94,6 @@ public class MainForm {
 		jFrame.setBounds(new Rectangle(320, 290, 540, 200));
 		jFrame.setResizable(false);// 大小不变
 		jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
 	}
 
 	public void setListener() {

@@ -4,6 +4,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JProgressBar;
+
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -17,21 +19,21 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Kevin
  *
  */
-public class WriteFile{
+public class WriteExcelFile {
 
 	private String file;
 
 	/**
 	 * @param file
 	 */
-	public WriteFile(String file) {
+	public WriteExcelFile(String file) {
 		this.file = file;
 	}
 
 	/**
 	 * 
 	 */
-	public WriteFile() {
+	public WriteExcelFile() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -52,7 +54,8 @@ public class WriteFile{
 	 * @throws IOException
 	 */
 	@SuppressWarnings("resource")
-	public void write(List<String[]> list) throws IOException {
+	public void write(List<String[]> list, JProgressBar proBar)
+			throws IOException {
 		Workbook workbook;
 		if (file.endsWith(".xls")) {
 			workbook = new HSSFWorkbook();
@@ -60,7 +63,7 @@ public class WriteFile{
 			workbook = new XSSFWorkbook();
 		}
 		Sheet sheet = workbook.createSheet("sheet1");
-		
+		int proBarValue = proBar.getValue();
 		for (int i = 0; i < list.size(); i++) {
 			String[] rowList = list.get(i);
 			Row row = sheet.createRow(i);
@@ -68,6 +71,7 @@ public class WriteFile{
 				Cell cell = row.createCell(j);
 				cell.setCellValue(rowList[j]);
 			}
+			proBar.setValue(proBarValue + i);
 		}
 		FileOutputStream fout = new FileOutputStream(file);
 		workbook.write(fout);

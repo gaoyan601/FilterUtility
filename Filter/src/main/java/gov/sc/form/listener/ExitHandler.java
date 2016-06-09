@@ -34,6 +34,8 @@ public class ExitHandler implements WindowListener {
 			WriteTxt writeTxt = new WriteTxt(con);
 			writeTxt.write();
 			jFrame.dispose();
+		} else if (result == JOptionPane.NO_OPTION) {
+			jFrame.dispose();
 		}
 	}
 
