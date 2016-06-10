@@ -1,5 +1,6 @@
 package gov.sc.form;
 
+//添加注释 测试
 import gov.sc.form.listener.BegButHandler;
 import gov.sc.form.listener.ConfMiHandler;
 import gov.sc.form.listener.DropDragSupportTextField;
@@ -145,7 +146,7 @@ public class MainForm {
 	}
 
 	public void setListener() {
-		jFrame.addWindowListener(new JFrameExitHandler());
+		jFrame.addWindowListener(new JFrameExitHandler(this));
 		helpMI.addActionListener(new HelpMiHandler());// 类名
 		confMI.addActionListener(new ConfMiHandler());
 		exitMI.addActionListener(new ExitMiHandler());

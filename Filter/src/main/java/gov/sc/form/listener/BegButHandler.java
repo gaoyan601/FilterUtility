@@ -125,7 +125,6 @@ public class BegButHandler implements ActionListener {
 				showErrorMessage();
 				return;
 			}
-			JOptionPane.showMessageDialog(jFrame, "解析成功");
 			proBar.setString("解析成功！！！");
 			begBut.setEnabled(true);
 			scanBut.setEnabled(true);
