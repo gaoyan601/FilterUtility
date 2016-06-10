@@ -82,7 +82,7 @@ public class MainForm {
 		fileMenu.add(exitMI);
 		helpMenu.add(helpMI);
 		// 窗体
-		jFrame.setTitle("舆情监测器");
+		jFrame.setTitle("舆情信息过滤器");
 		// srcPthTxtFiled
 		srcPthTxtFiled.setColumns(21);
 		srcPthTxtFiled.setFont(new Font("宋体", Font.BOLD, 24));
@@ -92,12 +92,14 @@ public class MainForm {
 		selectTarCol.setFont(new Font("宋体", Font.BOLD, 25));
 		selectTarCol.addItem("请选择文件");
 		selectTarCol.setPreferredSize(new Dimension(130, 30));
-		selectTarCol.setLayout(null);
+		//selectTarCol.setLayout(null);
+		selectTarCol.setFont(new Font("宋体", Font.BOLD, 20));
 		// selectTarTim
 		selectTarTim.setFont(new Font("宋体", Font.BOLD, 25));
 		selectTarTim.addItem("请选择文件");
 		selectTarTim.setPreferredSize(new Dimension(130, 30));
 		selectTarTim.setFont(new Font("宋体", Font.BOLD, 20));
+		//selectTarCol.setLayout(null);
 		// scanBut
 		scanBut.setFont(new Font("宋体", Font.BOLD, 25));
 		// begBut
@@ -130,7 +132,6 @@ public class MainForm {
 		selectFile.setPreferredSize(new Dimension(130, 63));
 		selectFile.setFont(new Font("宋体", Font.BOLD, 25));
 		// selectCol
-		selectTarCol.setFont(new Font("宋体", Font.BOLD, 20));
 		selectCol.setFont(new Font("宋体", Font.BOLD, 25));
 		selectCol.setPreferredSize(new Dimension(110, 45));
 		// selectTim

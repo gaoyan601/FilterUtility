@@ -125,7 +125,7 @@ public class BegButHandler implements ActionListener {
 				showErrorMessage();
 				return;
 			}
-			proBar.setString("解析成功！！！");
+			proBar.setString("文件解析成功");
 			begBut.setEnabled(true);
 			scanBut.setEnabled(true);
 			proBar.setValue(0);
