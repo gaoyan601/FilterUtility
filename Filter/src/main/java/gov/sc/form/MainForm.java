@@ -145,7 +145,7 @@ public class MainForm {
 	}
 
 	public void setListener() {
-		jFrame.addWindowListener(new JFrameExitHandler());
+		jFrame.addWindowListener(new JFrameExitHandler(this));
 		helpMI.addActionListener(new HelpMiHandler());// 类名
 		confMI.addActionListener(new ConfMiHandler());
 		exitMI.addActionListener(new ExitMiHandler());
