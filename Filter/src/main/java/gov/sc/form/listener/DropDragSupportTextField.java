@@ -64,7 +64,7 @@ public class DropDragSupportTextField extends JTextField implements
 				selectTarTim.setSelectedIndex(i);
 			}
 		}
-		proBar.setString("初始化成功，请点击开始按钮");
+		proBar.setString("初始化成功--》选择目标列和时间列--》点击开始按钮。");
 		form.begBut.setEnabled(true);
 		dropThread = null;
 	}
@@ -124,7 +124,7 @@ public class DropDragSupportTextField extends JTextField implements
 			}
 		} catch (Exception err) {
 			err.printStackTrace();
-			form.progressbar.setString("文件获取失败.....");
+			form.progressbar.setString("文件初始化失败.....");
 			logger.info("initialization failed!" + err.toString());
 		}
 	}
