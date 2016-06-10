@@ -65,13 +65,13 @@ public class BegButHandler implements ActionListener {
 		private void showErrorMessage() {
 			JOptionPane.showMessageDialog(jFrame, "文件解析失败");
 			proBar.setValue(0);
-			proBar.setString("请选择正确目标列和时间列");
 			begBut.setEnabled(true);
 			scanBut.setEnabled(true);
 		}
 
 		@Override
 		public void run() {
+			proBar.setString("数据解析中，请稍后...");
 			File fileAll = new File(reFile.replace(".xls",
 					"(过滤后所有数据" + selectTarCol.getSelectedItem() + "+"
 							+ selectTarTim.getSelectedItem() + ").xls"));
@@ -98,7 +98,7 @@ public class BegButHandler implements ActionListener {
 				return;
 			}
 			
-			proBar.setString("文件解析中...");
+			
 			int tarline = selectTarCol.getSelectedIndex();
 			int timeline = selectTarTim.getSelectedIndex();
 			Cluster cluster = new Cluster(cells, tarline, timeline);
@@ -107,6 +107,7 @@ public class BegButHandler implements ActionListener {
 					"(过滤后所有数据" + selectTarCol.getSelectedItem() + "+"
 							+ selectTarTim.getSelectedItem() + ").xls"));
 			try {
+				proBar.setString("将结果写入文件，请稍后...");
 				write.write(reList,proBar);
 			} catch (Exception e) {
 				logger.info("write all result file error--->" + e.toString());
@@ -125,7 +126,7 @@ public class BegButHandler implements ActionListener {
 				showErrorMessage();
 				return;
 			}
-			proBar.setString("解析成功！！！");
+			proBar.setString("文件解析完成");
 			begBut.setEnabled(true);
 			scanBut.setEnabled(true);
 			proBar.setValue(0);
