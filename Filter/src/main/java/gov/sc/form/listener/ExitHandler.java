@@ -29,7 +29,7 @@ public class ExitHandler implements WindowListener {
 
 	public void windowClosing(WindowEvent e) {
 		// TODO Auto-generated method stub
-		int result = JOptionPane.showConfirmDialog(null, "是否保存文件");
+		int result = JOptionPane.showConfirmDialog(jFrame, "是否保存文件");
 		if (result == JOptionPane.YES_OPTION) {
 			WriteTxt writeTxt = new WriteTxt(con);
 			writeTxt.write();
