@@ -1,7 +1,5 @@
 package gov.sc.form.listener;
 
-import org.apache.log4j.Logger;
-
 import gov.sc.file.ReadExcelFile;
 import gov.sc.form.MainForm;
 
@@ -19,9 +17,12 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
+
+import org.apache.log4j.Logger;
 
 @SuppressWarnings("serial")
 public class DropDragSupportTextField extends JTextField implements
@@ -35,10 +36,11 @@ public class DropDragSupportTextField extends JTextField implements
 	private DropThread dropThread = null;
 	//判断是否正在解析。
 	public static boolean begPress = false;
-	
+	private JFrame jFrame;
 	public DropDragSupportTextField(MainForm form) {
 		this.form = form;
-		new DropTarget(form.jFrame, DnDConstants.ACTION_COPY_OR_MOVE, this,
+	    this.jFrame = form.jFrame;
+		new DropTarget(jFrame, DnDConstants.ACTION_COPY_OR_MOVE, this,
 				true);
 	}
 	
@@ -62,7 +64,7 @@ public class DropDragSupportTextField extends JTextField implements
 				selectTarTim.setSelectedIndex(i);
 			}
 		}
-		proBar.setString("initialization succeed!");
+		proBar.setString("获取文件成功");
 		form.begBut.setEnabled(true);
 		dropThread = null;
 	}
@@ -89,7 +91,7 @@ public class DropDragSupportTextField extends JTextField implements
 		//判断是否存在已经存在的拖入线程，如果存在停止该线程。
 		if(begPress)
 		{
-			JOptionPane.showMessageDialog(form.jFrame, "正在解析，请稍后...");
+			JOptionPane.showMessageDialog(jFrame, "正在解析，请稍后...");
 			return;
 		}
 		if(dropThread != null)
@@ -97,7 +99,7 @@ public class DropDragSupportTextField extends JTextField implements
 		
 		JProgressBar proBar = form.progressbar;
 		form.begBut.setEnabled(false);
-		proBar.setString("initializing.....");
+		proBar.setString("正在解析，请稍后...");
 		try {
 			Transferable tr = dtde.getTransferable(); // 得到传递来的数据对象
 			// 处理数据对象，得到其中的文本信息
@@ -122,7 +124,7 @@ public class DropDragSupportTextField extends JTextField implements
 			}
 		} catch (Exception err) {
 			err.printStackTrace();
-			form.progressbar.setString("initialization failed.....");
+			form.progressbar.setString("文件获取失败.....");
 			logger.info("initialization failed!" + err.toString());
 		}
 	}
